@@ -1,715 +1,1286 @@
-{% comment %}
-  Component Library — Development Only
-  Assign this template to a page called "Component Library" in the Shopify admin.
-  URL: /pages/component-library
-  Do not link in navigation.
-{% endcomment %}
+{%- comment -%}
+  sections/component-library.liquid
+  ─────────────────────────────────────────────────────────────────────────────
+  Tinker Theme — Native Component Library
+  All components use Tinker's exact HTML patterns, CSS classes, and web
+  components. No design system overrides. Placeholder copy is dummy content
+  only and does not affect the live theme.
+{%- endcomment -%}
 
-<style>
-  .cl-wrap {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 0;
-    min-height: 100vh;
-  }
+{% stylesheet %}
 
-  .cl-nav {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-    border-right: 1px solid var(--color-border);
-    padding: var(--padding-lg);
-    background: var(--color-background);
-  }
+/* ── Component Library Shell ─────────────────────────────────────────────── */
 
-  .cl-nav-title {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-foreground-subdued);
-    margin-bottom: var(--margin-md);
-  }
+.cl-page {
+  padding-block: var(--padding-5xl);
+}
 
-  .cl-nav a {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--color-foreground);
-    text-decoration: none;
-    padding: 4px 0;
-    border-left: 2px solid transparent;
-    padding-left: var(--padding-sm);
-    transition: all var(--animation-speed);
-  }
+.cl-page-header {
+  padding-block-end: var(--padding-4xl);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+  margin-block-end: var(--margin-4xl);
+}
 
-  .cl-nav a:hover {
-    border-left-color: var(--color-primary-button-background);
-    color: var(--color-primary-button-background);
-  }
+.cl-page-header h1 {
+  margin-block: var(--margin-xs) 0;
+}
 
-  .cl-content {
-    padding: var(--padding-5xl) var(--padding-4xl);
-    max-width: 900px;
-  }
+.cl-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-sticky);
+  background-color: var(--color-background);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+  padding-block: var(--padding-xs);
+  margin-block-end: var(--margin-4xl);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
 
-  .cl-header {
-    margin-bottom: var(--margin-6xl);
-    padding-bottom: var(--padding-4xl);
-    border-bottom: 1px solid var(--color-border);
-  }
+.cl-nav::-webkit-scrollbar { display: none; }
 
-  .cl-header h1 {
-    margin-bottom: var(--margin-sm);
-  }
+.cl-nav__list {
+  display: flex;
+  gap: var(--gap-2xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
 
-  .cl-header p {
-    color: var(--color-foreground-subdued);
-    font-size: 0.9rem;
-  }
+.cl-nav__link {
+  display: inline-block;
+  padding: var(--padding-2xs) var(--padding-sm);
+  font-size: var(--font-size--xs);
+  font-family: var(--font-body--family);
+  color: var(--color-foreground);
+  text-decoration: none;
+  border-radius: var(--style-border-radius-xs);
+  transition: background-color var(--animation-values);
+  opacity: var(--opacity-70);
+}
 
-  .cl-section {
-    margin-bottom: var(--margin-6xl);
-    padding-bottom: var(--padding-6xl);
-    border-bottom: 1px solid var(--color-border);
-  }
+.cl-nav__link:hover {
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8));
+  opacity: 1;
+}
 
-  .cl-section:last-child {
-    border-bottom: none;
-  }
+.cl-section {
+  padding-block: var(--padding-4xl);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+}
 
-  .cl-section-title {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-foreground-subdued);
-    margin-bottom: var(--margin-4xl);
-    padding-bottom: var(--padding-xs);
-    border-bottom: 1px solid var(--color-border);
-  }
+.cl-section:last-child {
+  border-bottom: none;
+}
 
-  .cl-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: var(--gap-lg);
-    margin-bottom: var(--margin-4xl);
-  }
+.cl-eyebrow {
+  font-size: var(--font-size--2xs);
+  font-family: var(--font-body--family);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-md);
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-40));
+  margin-block-end: var(--margin-2xs);
+}
 
-  .cl-row:last-child {
-    margin-bottom: 0;
-  }
+.cl-section-title {
+  margin-block-end: var(--margin-4xl);
+}
 
-  .cl-label {
-    font-size: 0.65rem;
-    color: var(--color-foreground-subdued);
-    margin-bottom: var(--margin-xs);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
+.cl-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-2xl);
+  align-items: flex-start;
+  margin-block-end: var(--margin-4xl);
+}
 
-  .cl-item {
-    display: flex;
-    flex-direction: column;
-  }
+.cl-row:last-child { margin-block-end: 0; }
 
-  .cl-card-mock {
-    width: 220px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--style-border-radius-sm);
-    overflow: hidden;
-    background: var(--color-background);
-  }
+.cl-row--center { align-items: center; }
+.cl-row--col { flex-direction: column; }
 
-  .cl-card-image-mock {
-    height: 160px;
-    background: var(--color-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-foreground-subdued);
-    font-size: 0.75rem;
-  }
+.cl-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  min-width: 0;
+}
 
-  .cl-card-body {
-    padding: var(--padding-md);
-  }
+.cl-item--fill {
+  flex: 1;
+  min-width: min(280px, 100%);
+}
 
-  .cl-card-brand {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-foreground-subdued);
-    margin-bottom: var(--margin-xs);
-  }
+.cl-label {
+  font-size: var(--font-size--2xs);
+  font-family: var(--font-body--family);
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
 
-  .cl-card-title {
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: var(--margin-xs);
-  }
+.cl-demo {
+  padding: var(--padding-lg);
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+  border-radius: var(--style-border-radius-sm);
+  border: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+}
 
-  .cl-swatch-group {
-    display: flex;
-    gap: var(--gap-xs);
-    margin-bottom: var(--margin-sm);
-  }
+.cl-demo--lg {
+  padding: var(--padding-4xl);
+}
 
-  .cl-note {
-    font-size: 0.75rem;
-    color: var(--color-foreground-subdued);
-    font-style: italic;
-    margin-top: var(--margin-sm);
-  }
+.cl-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-3xl);
+}
 
-  .cl-web-component-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--gap-sm);
-  }
+@media (max-width: 749px) {
+  .cl-two-col { grid-template-columns: 1fr; }
+}
 
-  .cl-web-component-item {
-    font-family: monospace;
-    font-size: 0.75rem;
-    padding: var(--padding-xs) var(--padding-sm);
-    background: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: var(--style-border-radius-xs);
-    color: #333;
-  }
-</style>
+.cl-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--gap-xs);
+}
 
-<div class="cl-wrap">
+.cl-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-2xs);
+  padding: var(--padding-sm) var(--padding-xs);
+  border-radius: var(--style-border-radius-xs);
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+  text-align: center;
+}
 
-  {%- comment -%} Sidebar Nav {%- endcomment -%}
-  <nav class="cl-nav">
-    <div class="cl-nav-title">Components</div>
-    <a href="#typography">Typography</a>
-    <a href="#buttons">Buttons</a>
-    <a href="#inputs">Inputs & Forms</a>
-    <a href="#quantity">Quantity Selector</a>
-    <a href="#price">Price Display</a>
-    <a href="#swatches">Swatches & Pills</a>
-    <a href="#accordion">Accordion</a>
-    <a href="#product-card">Product Card</a>
-    <a href="#pagination">Pagination</a>
-    <a href="#icons">Icons</a>
-    <a href="#dividers">Dividers</a>
-    <a href="#web-components">Web Components</a>
+.cl-icon-item .cl-icon-name {
+  font-size: 9px;
+  font-family: var(--font-body--family);
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  word-break: break-all;
+  line-height: 1.3;
+}
+
+.cl-wc-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cl-wc-table th,
+.cl-wc-table td {
+  padding: var(--padding-sm) var(--padding-md);
+  text-align: left;
+  font-size: var(--font-size--sm);
+  font-family: var(--font-body--family);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+}
+
+.cl-wc-table th {
+  font-weight: 600;
+  font-size: var(--font-size--2xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+}
+
+.cl-wc-table td:first-child {
+  font-family: monospace;
+  font-size: var(--font-size--xs);
+  color: var(--color-foreground);
+}
+
+.cl-wc-table td:not(:first-child) {
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
+  font-size: var(--font-size--xs);
+}
+
+{% endstylesheet %}
+
+
+{%- comment -%} ── PAGE WRAPPER ─────────────────────────────────────────── {%- endcomment -%}
+<div class="cl-page page-width-normal">
+
+
+  {%- comment -%} ── PAGE HEADER ──────────────────────────────────────────── {%- endcomment -%}
+  <div class="cl-page-header">
+    <p class="cl-eyebrow">Tinker Theme</p>
+    <h1 class="h1">Component Library</h1>
+    <p class="paragraph">Native components, patterns, and tokens from the Tinker theme. All components use default Tinker CSS classes and web component implementations — no overrides.</p>
+  </div>
+
+
+  {%- comment -%} ── STICKY SECTION NAV ───────────────────────────────────── {%- endcomment -%}
+  <nav class="cl-nav" aria-label="Component sections">
+    <ul class="cl-nav__list" role="list">
+      <li><a class="cl-nav__link" href="#cl-typography">Typography</a></li>
+      <li><a class="cl-nav__link" href="#cl-buttons">Buttons</a></li>
+      <li><a class="cl-nav__link" href="#cl-forms">Forms</a></li>
+      <li><a class="cl-nav__link" href="#cl-quantity">Quantity</a></li>
+      <li><a class="cl-nav__link" href="#cl-price">Price</a></li>
+      <li><a class="cl-nav__link" href="#cl-swatches">Swatches</a></li>
+      <li><a class="cl-nav__link" href="#cl-accordion">Accordion</a></li>
+      <li><a class="cl-nav__link" href="#cl-pagination">Pagination</a></li>
+      <li><a class="cl-nav__link" href="#cl-icons">Icons</a></li>
+      <li><a class="cl-nav__link" href="#cl-dividers">Dividers</a></li>
+      <li><a class="cl-nav__link" href="#cl-badges">Badges</a></li>
+      <li><a class="cl-nav__link" href="#cl-media">Media</a></li>
+      <li><a class="cl-nav__link" href="#cl-utilities">Utilities</a></li>
+      <li><a class="cl-nav__link" href="#cl-web-components">Web Components</a></li>
+    </ul>
   </nav>
 
-  {%- comment -%} Main Content {%- endcomment -%}
-  <div class="cl-content">
 
-    <div class="cl-header">
-      <h1>Tinker Component Library</h1>
-      <p>All default Tinker theme components and styles. Development reference only — do not link in navigation.</p>
-    </div>
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 01 — TYPOGRAPHY {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-typography" class="cl-section">
+    <p class="cl-eyebrow">01</p>
+    <h2 class="h2 cl-section-title">Typography</h2>
 
-    {%- comment -%} ============================================================
-      TYPOGRAPHY
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="typography">
-      <div class="cl-section-title">Typography</div>
-
-      <div class="cl-row" style="flex-direction: column; gap: var(--gap-md);">
-        <div>
-          <div class="cl-label">H1</div>
-          <h1>The quick brown fox</h1>
-        </div>
-        <div>
-          <div class="cl-label">H2</div>
-          <h2>The quick brown fox</h2>
-        </div>
-        <div>
-          <div class="cl-label">H3</div>
-          <h3>The quick brown fox</h3>
-        </div>
-        <div>
-          <div class="cl-label">H4</div>
-          <h4>The quick brown fox</h4>
-        </div>
-        <div>
-          <div class="cl-label">H5</div>
-          <h5>The quick brown fox</h5>
-        </div>
-        <div>
-          <div class="cl-label">H6</div>
-          <h6>The quick brown fox</h6>
-        </div>
-        <div>
-          <div class="cl-label">Body — Paragraph</div>
-          <p>The quick brown fox jumps over the lazy dog. Shopify themes are flexible systems for building commerce experiences. This is standard paragraph body copy at the default font size and line height.</p>
-        </div>
-        <div>
-          <div class="cl-label">Link</div>
-          <a href="#">This is a text link</a>
-        </div>
-        <div>
-          <div class="cl-label">Small / Caption</div>
-          <small>The quick brown fox jumps over the lazy dog.</small>
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">Heading scale — h1 through h6 (element tags + utility classes)</p>
+        <div class="cl-demo cl-demo--lg">
+          <div class="text-block">
+            <h1 class="h1">Heading One</h1>
+            <h2 class="h2">Heading Two</h2>
+            <h3 class="h3">Heading Three</h3>
+            <h4 class="h4">Heading Four</h4>
+            <h5 class="h5">Heading Five</h5>
+            <h6 class="h6">Heading Six</h6>
+          </div>
         </div>
       </div>
     </div>
 
-    {%- comment -%} ============================================================
-      BUTTONS
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="buttons">
-      <div class="cl-section-title">Buttons</div>
-
-      <div class="cl-row">
-        <div class="cl-item">
-          <div class="cl-label">Primary (.button)</div>
-          <button class="button" type="button">Primary Button</button>
-        </div>
-        <div class="cl-item">
-          <div class="cl-label">Secondary (.button-secondary)</div>
-          <button class="button-secondary" type="button">Secondary Button</button>
-        </div>
-        <div class="cl-item">
-          <div class="cl-label">Unstyled (.button-unstyled)</div>
-          <button class="button-unstyled" type="button">Unstyled Button</button>
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.paragraph</p>
+        <div class="cl-demo">
+          <p class="paragraph">Body copy using the paragraph class. Tinker applies the configured body font family, size, weight, line height, and letter spacing from theme settings via CSS custom properties — <code>--font-paragraph--family</code>, <code>--font-paragraph--size</code>, etc.</p>
         </div>
       </div>
-
-      <div class="cl-row">
-        <div class="cl-item">
-          <div class="cl-label">Primary — Disabled</div>
-          <button class="button" type="button" disabled>Disabled</button>
-        </div>
-        <div class="cl-item">
-          <div class="cl-label">Secondary — Disabled</div>
-          <button class="button-secondary" type="button" disabled>Disabled</button>
-        </div>
-        <div class="cl-item">
-          <div class="cl-label">Primary — aria-disabled</div>
-          <button class="button" type="button" aria-disabled="true">Aria Disabled</button>
-        </div>
-      </div>
-
-      <div class="cl-row">
-        <div class="cl-item">
-          <div class="cl-label">Unstyled with Icon (.button-unstyled--with-icon)</div>
-          <button class="button-unstyled button-unstyled--with-icon" type="button">
-            {% render 'icon', icon: 'search' %}
-            Search
-          </button>
-        </div>
-        <div class="cl-item">
-          <div class="cl-label">Transparent (.button-unstyled--transparent)</div>
-          <button class="button-unstyled button-unstyled--transparent" type="button">Transparent</button>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.text-block</p>
+        <div class="cl-demo">
+          <div class="text-block">
+            <h3 class="h4">Text Block Title</h3>
+            <p class="paragraph">The text-block class manages margin between adjacent children — removes margin from the first and last child so the container controls spacing.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    {%- comment -%} ============================================================
-      INPUTS & FORMS
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="inputs">
-      <div class="cl-section-title">Inputs & Forms</div>
-
-      <div class="cl-row" style="flex-direction: column; gap: var(--gap-lg); max-width: 400px;">
-
-        <div class="cl-item" style="width: 100%;">
-          <div class="cl-label">Text Input (.field)</div>
-          <div class="field">
-            <input class="field__input" type="text" id="cl-input-1" placeholder=" ">
-            <label class="field__label" for="cl-input-1">Label</label>
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.rte (Rich Text Editor output)</p>
+        <div class="cl-demo">
+          <div class="rte">
+            <h3>RTE Heading</h3>
+            <p>Paragraph with <strong>bold</strong>, <em>italic</em>, and an <a href="#">inline link</a>.</p>
+            <ul>
+              <li>List item one</li>
+              <li>List item two</li>
+              <li>List item three</li>
+            </ul>
+            <blockquote>A blockquote inside rich text content.</blockquote>
           </div>
         </div>
-
-        <div class="cl-item" style="width: 100%;">
-          <div class="cl-label">Text Input — Filled</div>
-          <div class="field">
-            <input class="field__input" type="text" id="cl-input-2" value="Filled value" placeholder=" ">
-            <label class="field__label" for="cl-input-2">Label</label>
-          </div>
+      </div>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">Text alignment utilities</p>
+        <div class="cl-demo">
+          <p class="paragraph text-left" style="margin-block-end: var(--margin-xs);">Left-aligned (.text-left)</p>
+          <p class="paragraph text-center" style="margin-block-end: var(--margin-xs);">Center-aligned (.text-center)</p>
+          <p class="paragraph text-right">Right-aligned (.text-right)</p>
         </div>
+      </div>
+    </div>
 
-        <div class="cl-item" style="width: 100%;">
-          <div class="cl-label">Email Input</div>
-          <div class="field">
-            <input class="field__input" type="email" id="cl-input-3" placeholder=" ">
-            <label class="field__label" for="cl-input-3">Email Address</label>
-          </div>
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">&lt;jumbo-text&gt; — fills container width</p>
+        <div class="cl-demo cl-demo--lg" style="overflow: hidden;">
+          <jumbo-text>
+            <h2 class="h2">Jumbo</h2>
+          </jumbo-text>
         </div>
+      </div>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">Links — default and within headings</p>
+        <div class="cl-demo">
+          <p class="paragraph">Inline <a href="#">paragraph link</a> — inherits from <code>--color</code> and <code>--color-foreground</code>.</p>
+          <h4 class="h5" style="margin-block-start: var(--margin-md);"><a href="#">Heading as a link</a></h4>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="cl-item" style="width: 100%;">
-          <div class="cl-label">Textarea</div>
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 02 — BUTTONS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-buttons" class="cl-section">
+    <p class="cl-eyebrow">02</p>
+    <h2 class="h2 cl-section-title">Buttons</h2>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.button (primary)</p>
+        <button class="button" type="button">Primary Button</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-secondary</p>
+        <button class="button-secondary" type="button">Secondary Button</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-custom</p>
+        <button class="button-custom" type="button">Custom Button</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-unstyled</p>
+        <button class="button-unstyled" type="button">Unstyled</button>
+      </div>
+    </div>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">Primary — disabled</p>
+        <button class="button" type="button" disabled>Disabled</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">Primary — aria-disabled</p>
+        <button class="button" type="button" aria-disabled="true">Aria Disabled</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">Secondary — disabled</p>
+        <button class="button-secondary" type="button" disabled>Disabled</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-unstyled--with-icon</p>
+        <button class="button-unstyled button-unstyled--with-icon" type="button">
+          <span class="svg-wrapper">{% render 'icon', icon: 'heart' %}</span>
+          Wishlist
+        </button>
+      </div>
+    </div>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.show-more__button</p>
+        <button class="show-more__button" type="button" aria-expanded="false">
+          <span class="show-more__label show-more__label--more">Show more</span>
+          <span class="show-more__label show-more__label--less" hidden>Show less</span>
+          <span class="svg-wrapper">
+            <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 03 — FORMS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-forms" class="cl-section">
+    <p class="cl-eyebrow">03</p>
+    <h2 class="h2 cl-section-title">Form Components</h2>
+
+    <div class="cl-two-col">
+      <div style="display: flex; flex-direction: column; gap: var(--gap-xl);">
+
+        <div class="cl-item">
+          <p class="cl-label">.field — text input</p>
           <div class="field">
-            <textarea class="field__input" id="cl-textarea-1" rows="4" placeholder=" "></textarea>
-            <label class="field__label" for="cl-textarea-1">Message</label>
+            <input class="field__input" type="text" id="cl-text" name="cl-text" placeholder="Placeholder" autocomplete="off">
+            <label class="field__label" for="cl-text">Text Input</label>
           </div>
         </div>
 
         <div class="cl-item">
-          <div class="cl-label">Checkbox (.checkbox)</div>
-          <div class="checkbox">
-            <input class="checkbox__input" type="checkbox" id="cl-checkbox-1">
-            <label class="checkbox__label" for="cl-checkbox-1">
-              <span class="checkbox__label-text">I agree to the terms</span>
+          <p class="cl-label">.field — email</p>
+          <div class="field">
+            <input class="field__input" type="email" id="cl-email" name="cl-email" placeholder="name@example.com" autocomplete="email">
+            <label class="field__label" for="cl-email">Email Address</label>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <p class="cl-label">.field — textarea</p>
+          <div class="field">
+            <textarea class="field__input" id="cl-textarea" name="cl-textarea" rows="4" placeholder="Enter your message..."></textarea>
+            <label class="field__label" for="cl-textarea">Message</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--gap-xl);">
+
+        <div class="cl-item">
+          <p class="cl-label">.checkbox</p>
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs);">
+            <div class="checkbox">
+              <input type="checkbox" class="checkbox__input" id="cl-cb-1" name="cl-cb" value="1">
+              <label class="checkbox__label" for="cl-cb-1">
+                <svg class="icon-checkmark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8 L6 12 L14 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="checkbox__label-text">Unchecked option</span>
+              </label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" class="checkbox__input" id="cl-cb-2" name="cl-cb" value="2" checked>
+              <label class="checkbox__label" for="cl-cb-2">
+                <svg class="icon-checkmark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8 L6 12 L14 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="checkbox__label-text">Checked option</span>
+              </label>
+            </div>
+            <div class="checkbox checkbox--disabled">
+              <input type="checkbox" class="checkbox__input" id="cl-cb-3" name="cl-cb" value="3" disabled>
+              <label class="checkbox__label" for="cl-cb-3">
+                <svg class="icon-checkmark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8 L6 12 L14 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="checkbox__label-text">Disabled option</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <p class="cl-label">input[type="radio"]</p>
+          <div style="display: flex; flex-direction: column; gap: var(--gap-sm);">
+            <label style="display: flex; align-items: center; gap: var(--gap-sm); cursor: pointer; font-family: var(--font-body--family); font-size: var(--font-size--md);">
+              <input type="radio" name="cl-radio" value="a"> Option One
+            </label>
+            <label style="display: flex; align-items: center; gap: var(--gap-sm); cursor: pointer; font-family: var(--font-body--family); font-size: var(--font-size--md);">
+              <input type="radio" name="cl-radio" value="b" checked> Option Two (selected)
+            </label>
+            <label style="display: flex; align-items: center; gap: var(--gap-sm); cursor: pointer; font-family: var(--font-body--family); font-size: var(--font-size--md); opacity: var(--opacity-50);">
+              <input type="radio" name="cl-radio" value="c" disabled> Disabled Option
             </label>
           </div>
         </div>
 
-        <div class="cl-item">
-          <div class="cl-label">Checkbox — Checked</div>
-          <div class="checkbox">
-            <input class="checkbox__input" type="checkbox" id="cl-checkbox-2" checked>
-            <label class="checkbox__label" for="cl-checkbox-2">
-              <span class="checkbox__label-text">This one is checked</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="cl-item">
-          <div class="cl-label">Checkbox — Disabled</div>
-          <div class="checkbox">
-            <input class="checkbox__input" type="checkbox" id="cl-checkbox-3" disabled>
-            <label class="checkbox__label" for="cl-checkbox-3">
-              <span class="checkbox__label-text">Disabled checkbox</span>
-            </label>
-          </div>
-        </div>
-
       </div>
     </div>
+  </section>
 
-    {%- comment -%} ============================================================
-      QUANTITY SELECTOR
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="quantity">
-      <div class="cl-section-title">Quantity Selector</div>
 
-      <div class="cl-row">
-        <div class="cl-item">
-          <div class="cl-label">Default (.quantity-selector)</div>
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 04 — QUANTITY SELECTOR {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-quantity" class="cl-section">
+    <p class="cl-eyebrow">04</p>
+    <h2 class="h2 cl-section-title">Quantity Selector</h2>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">Default &lt;quantity-selector-component&gt;</p>
+        <quantity-selector-component>
           <div class="quantity-selector">
-            <button class="quantity-minus button-unstyled" type="button" aria-label="Decrease quantity">
-              <span class="svg-wrapper">{% render 'icon', icon: 'minus' %}</span>
+            <button class="quantity-minus" ref="minusButton" type="button" aria-label="Decrease quantity">
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
             </button>
-            <input type="number" class="" value="1" min="1" aria-label="Quantity">
-            <button class="quantity-plus button-unstyled" type="button" aria-label="Increase quantity">
-              <span class="svg-wrapper">{% render 'icon', icon: 'plus' %}</span>
+            <input ref="quantityInput" type="number" min="1" max="99" step="1" value="1" data-cart-quantity="0" aria-label="Quantity" id="cl-qty-1" name="quantity">
+            <button class="quantity-plus" ref="plusButton" type="button" aria-label="Increase quantity">
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
             </button>
           </div>
+        </quantity-selector-component>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">At minimum — minus disabled</p>
+        <quantity-selector-component>
+          <div class="quantity-selector">
+            <button class="quantity-minus" ref="minusButton" type="button" aria-label="Decrease quantity" disabled>
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <input ref="quantityInput" type="number" min="1" max="99" step="1" value="1" data-cart-quantity="0" aria-label="Quantity" id="cl-qty-2" name="quantity">
+            <button class="quantity-plus" ref="plusButton" type="button" aria-label="Increase quantity">
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+          </div>
+        </quantity-selector-component>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 05 — PRICE DISPLAY {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-price" class="cl-section">
+    <p class="cl-eyebrow">05</p>
+    <h2 class="h2 cl-section-title">Price Display</h2>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">Regular price (.price__regular)</p>
+        <div class="cl-demo">
+          <div class="price__regular">
+            <span class="price-item__group">
+              <span class="price">$49.99</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">Sale price + compare-at</p>
+        <div class="cl-demo">
+          <div class="price__sale">
+            <span class="price-item__group">
+              <span class="price price-item--sale">$34.99</span>
+              <s class="compare-at-price">$49.99</s>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">With unit price (.unit-price)</p>
+        <div class="cl-demo">
+          <div class="price__regular">
+            <span class="price-item__group">
+              <span class="price">$24.99</span>
+            </span>
+            <div class="unit-price">$0.83 / capsule</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">Tax note (.tax-note)</p>
+        <div class="cl-demo">
+          <div class="price__regular">
+            <span class="price-item__group">
+              <span class="price">$59.99</span>
+            </span>
+            <div class="tax-note">Tax included. Shipping calculated at checkout.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 06 — SWATCHES & VARIANT PICKERS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-swatches" class="cl-section">
+    <p class="cl-eyebrow">06</p>
+    <h2 class="h2 cl-section-title">Swatches &amp; Variant Pickers</h2>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.swatch — color swatches</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <span class="swatch" style="--swatch-background: #E63946; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #457B9D; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #2D6A4F; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #F4A261; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #1D1D1D; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #F5F5F5; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch swatch--unavailable" style="--swatch-background: #B0B0B0; --swatch-focal-point: 50% 50%;"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.swatch--pill — size/text options</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <span class="swatch swatch--pill">XS</span>
+            <span class="swatch swatch--pill">SM</span>
+            <span class="swatch swatch--pill">MD</span>
+            <span class="swatch swatch--pill">LG</span>
+            <span class="swatch swatch--pill">XL</span>
+            <span class="swatch swatch--pill swatch--unavailable">2XL</span>
+          </div>
         </div>
       </div>
     </div>
 
-    {%- comment -%} ============================================================
-      PRICE DISPLAY
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="price">
-      <div class="cl-section-title">Price Display</div>
-
-      <div class="cl-row">
-        <div class="cl-item">
-          <div class="cl-label">Regular Price (.price)</div>
-          <div class="price">
-            <span class="price-item price-item--regular">$49.99</span>
-          </div>
-        </div>
-
-        <div class="cl-item">
-          <div class="cl-label">Sale Price (.price-item--sale)</div>
-          <div class="price price--on-sale">
-            <div class="price-item__group">
-              <span class="price-item price-item--sale">$34.99</span>
-              <s class="price-item price-item--regular">$49.99</s>
-            </div>
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.swatch--filter — filter panel swatches</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <span class="swatch swatch--filter" style="--swatch-background: #E63946;"></span>
+            <span class="swatch swatch--filter" style="--swatch-background: #457B9D;"></span>
+            <span class="swatch swatch--filter" style="--swatch-background: #2D6A4F;"></span>
+            <span class="swatch swatch--filter" style="--swatch-background: #1D1D1D;"></span>
+            <span class="swatch swatch--filter swatch--unavailable" style="--swatch-background: #B0B0B0;"></span>
           </div>
         </div>
       </div>
-    </div>
 
-    {%- comment -%} ============================================================
-      SWATCHES & PILLS
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="swatches">
-      <div class="cl-section-title">Swatches & Option Pills</div>
-
-      <div class="cl-row" style="flex-direction: column; gap: var(--gap-lg);">
-
-        <div class="cl-item">
-          <div class="cl-label">Color Swatches (.swatch)</div>
-          <div class="cl-swatch-group">
-            <span class="swatch" style="background-color: #c0392b;" title="Red" aria-label="Red"></span>
-            <span class="swatch" style="background-color: #2980b9;" title="Blue" aria-label="Blue"></span>
-            <span class="swatch" style="background-color: #27ae60;" title="Green" aria-label="Green"></span>
-            <span class="swatch" style="background-color: #f39c12;" title="Yellow" aria-label="Yellow"></span>
-            <span class="swatch" style="background-color: #1a1a1a;" title="Black" aria-label="Black"></span>
-            <span class="swatch" style="background-color: #ffffff; border: 1px solid #ddd;" title="White" aria-label="White"></span>
-          </div>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.variant-option__button-label — variant buttons</p>
+        <div class="cl-demo">
+          <fieldset class="variant-option variant-option--buttons" style="border: none; padding: 0; margin: 0;">
+            <legend class="visually-hidden">Size</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs);">
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="xs">
+                <span class="variant-option__button-label__text">XS</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="sm">
+                <span class="variant-option__button-label__text">SM</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="md" checked>
+                <span class="variant-option__button-label__text">MD</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="lg">
+                <span class="variant-option__button-label__text">LG</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="xl" data-option-available="false">
+                <span class="variant-option__button-label__text">XL</span>
+              </label>
+            </div>
+          </fieldset>
         </div>
-
-        <div class="cl-item">
-          <div class="cl-label">Option Pills (.pills__pill)</div>
-          <div style="display: flex; gap: var(--gap-xs); flex-wrap: wrap;">
-            <button class="pills__pill" type="button">Small</button>
-            <button class="pills__pill" type="button">Medium</button>
-            <button class="pills__pill" type="button">Large</button>
-            <button class="pills__pill" type="button" disabled>X-Large</button>
-          </div>
-        </div>
-
-        <div class="cl-item">
-          <div class="cl-label">Small Pills (.pills__pill--desktop-small)</div>
-          <div style="display: flex; gap: var(--gap-xs); flex-wrap: wrap;">
-            <button class="pills__pill pills__pill--desktop-small" type="button">30ct</button>
-            <button class="pills__pill pills__pill--desktop-small" type="button">60ct</button>
-            <button class="pills__pill pills__pill--desktop-small" type="button">90ct</button>
-          </div>
-        </div>
-
       </div>
     </div>
+  </section>
 
-    {%- comment -%} ============================================================
-      ACCORDION
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="accordion">
-      <div class="cl-section-title">Accordion</div>
 
-      <div style="max-width: 500px;">
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 07 — ACCORDION {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-accordion" class="cl-section">
+    <p class="cl-eyebrow">07</p>
+    <h2 class="h2 cl-section-title">Accordion</h2>
 
-        {%- capture accordion_1 -%}
-          <details>
-            <summary style="cursor: pointer; padding: var(--padding-md) 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
-              What are the ingredients?
-              <span class="icon-caret">{% render 'icon', icon: 'caret' %}</span>
-            </summary>
-            <div class="details-content" style="padding: var(--padding-md) 0;">
-              <p>This product contains a proprietary blend of vitamins, minerals, and botanical extracts. See full label for complete ingredient list.</p>
-            </div>
-          </details>
-        {%- endcapture -%}
-        {% render 'accordion-custom-component', children: accordion_1, close_with_escape: true %}
-
-        {%- capture accordion_2 -%}
-          <details>
-            <summary style="cursor: pointer; padding: var(--padding-md) 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
-              How should I take this supplement?
-              <span class="icon-caret">{% render 'icon', icon: 'caret' %}</span>
-            </summary>
-            <div class="details-content" style="padding: var(--padding-md) 0;">
-              <p>Take two capsules daily with a meal. Do not exceed the recommended dose. Consult your healthcare provider before use.</p>
-            </div>
-          </details>
-        {%- endcapture -%}
-        {% render 'accordion-custom-component', children: accordion_2, close_with_escape: true %}
-
-        {%- capture accordion_3 -%}
-          <details open>
-            <summary style="cursor: pointer; padding: var(--padding-md) 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
-              Open by default
-              <span class="icon-caret">{% render 'icon', icon: 'caret' %}</span>
-            </summary>
-            <div class="details-content" style="padding: var(--padding-md) 0;">
-              <p>This accordion item starts open. The <code>open</code> attribute on the <code>details</code> element controls this.</p>
-            </div>
-          </details>
-        {%- endcapture -%}
-        {% render 'accordion-custom-component', children: accordion_3, open: true, close_with_escape: true %}
-
-      </div>
-    </div>
-
-    {%- comment -%} ============================================================
-      PRODUCT CARD MOCK
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="product-card">
-      <div class="cl-section-title">Product Card</div>
-      <p class="cl-note">Static mock using Tinker's card structure. Live product cards render via the <code>product-card</code> web component with real product data.</p>
-
-      <div class="cl-row" style="margin-top: var(--margin-xl);">
-
-        <div class="cl-card-mock">
-          <div class="cl-card-image-mock">Image placeholder</div>
-          <div class="cl-card-body">
-            <div class="cl-card-brand">NeuroSolution</div>
-            <div class="cl-card-title">Omega-3 Fish Oil 1000mg</div>
-            <div class="price" style="margin-top: var(--margin-xs); margin-bottom: var(--margin-sm);">
-              <span class="price-item price-item--regular">$39.99</span>
-            </div>
-            <div class="cl-swatch-group" style="margin-bottom: var(--margin-sm);">
-              <span class="swatch" style="background-color: #c0392b;" title="Red"></span>
-              <span class="swatch" style="background-color: #2980b9;" title="Blue"></span>
-              <span class="swatch" style="background-color: #1a1a1a;" title="Black"></span>
-            </div>
-            <button class="button" type="button" style="width: 100%;">Add to Cart</button>
-          </div>
-        </div>
-
-        <div class="cl-card-mock">
-          <div class="cl-card-image-mock">Image placeholder</div>
-          <div class="cl-card-body">
-            <div class="cl-card-brand">NeuroSolution</div>
-            <div class="cl-card-title">Magnesium Glycinate 400mg</div>
-            <div class="price price--on-sale" style="margin-top: var(--margin-xs); margin-bottom: var(--margin-sm);">
-              <div class="price-item__group">
-                <span class="price-item price-item--sale">$29.99</span>
-                <s class="price-item price-item--regular">$44.99</s>
+    <div class="cl-two-col">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">&lt;accordion-custom&gt; with .icon-plus</p>
+        <div class="cl-demo">
+          <accordion-custom>
+            <details>
+              <summary>
+                <span>What ingredients are in this supplement?</span>
+                <span class="svg-wrapper">
+                  <span class="icon-plus">
+                    <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+                  </span>
+                </span>
+              </summary>
+              <div class="rte">
+                <p>Contains a proprietary blend of adaptogens, vitamins, and minerals formulated for cognitive performance. Full ingredient list on the product label.</p>
               </div>
-            </div>
-            <div style="display: flex; gap: var(--gap-xs); margin-bottom: var(--margin-sm);">
-              <button class="pills__pill pills__pill--desktop-small" type="button">60ct</button>
-              <button class="pills__pill pills__pill--desktop-small" type="button">120ct</button>
-            </div>
-            <button class="button" type="button" style="width: 100%;">Add to Cart</button>
-          </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom>
+            <details>
+              <summary>
+                <span>How should I take this product?</span>
+                <span class="svg-wrapper">
+                  <span class="icon-plus">
+                    <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+                  </span>
+                </span>
+              </summary>
+              <div class="rte">
+                <p>Take two capsules daily with water, preferably with a meal. Do not exceed the recommended daily dose. Consult your healthcare provider before use.</p>
+              </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom>
+            <details open>
+              <summary>
+                <span>Is this product third-party tested?</span>
+                <span class="svg-wrapper">
+                  <span class="icon-plus">
+                    <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+                  </span>
+                </span>
+              </summary>
+              <div class="rte">
+                <p>Yes. All products are independently tested for purity and potency. Certificates of Analysis are available on request. (This item is open by default via the <code>open</code> attribute.)</p>
+              </div>
+            </details>
+          </accordion-custom>
         </div>
+      </div>
 
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">&lt;accordion-custom&gt; with .icon-caret</p>
+        <div class="cl-demo">
+          <accordion-custom>
+            <details>
+              <summary>
+                <span>Shipping &amp; Returns</span>
+                <span class="svg-wrapper">
+                  <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="rte">
+                <p>Orders ship within 1–2 business days. Standard delivery 5–7 business days. Free shipping on orders over $75. Returns accepted within 30 days of purchase.</p>
+              </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom data-disable-on-mobile="true">
+            <details>
+              <summary>
+                <span>Disabled on Mobile (data-disable-on-mobile)</span>
+                <span class="svg-wrapper">
+                  <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="rte">
+                <p>This accordion is always open on mobile because <code>data-disable-on-mobile="true"</code> is set. On desktop it collapses normally.</p>
+              </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom data-close-with-escape="true">
+            <details>
+              <summary>
+                <span>Closes with Escape Key</span>
+                <span class="svg-wrapper">
+                  <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="rte">
+                <p>This accordion respects <kbd>Escape</kbd> to close because <code>data-close-with-escape="true"</code> is set.</p>
+              </div>
+            </details>
+          </accordion-custom>
+        </div>
       </div>
     </div>
+  </section>
 
-    {%- comment -%} ============================================================
-      PAGINATION
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="pagination">
-      <div class="cl-section-title">Pagination</div>
-      <p class="cl-note">Pagination renders via the <code>pagination-controls</code> snippet using the Liquid <code>paginate</code> object. Static structure shown below.</p>
 
-      <div style="margin-top: var(--margin-xl);">
-        <nav aria-label="Pagination">
-          <div style="display: flex; gap: var(--gap-xs); align-items: center;">
-            <button class="button-secondary" type="button" aria-label="Previous page">
-              {% render 'icon', icon: 'caret' %}
-            </button>
-            <button class="button-secondary" type="button" aria-current="false">1</button>
-            <button class="button" type="button" aria-current="page">2</button>
-            <button class="button-secondary" type="button" aria-current="false">3</button>
-            <button class="button-secondary" type="button" aria-label="Next page">
-              {% render 'icon', icon: 'caret' %}
-            </button>
-          </div>
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 08 — PAGINATION {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-pagination" class="cl-section">
+    <p class="cl-eyebrow">08</p>
+    <h2 class="h2 cl-section-title">Pagination</h2>
+
+    <div class="cl-row cl-row--col">
+      <div class="cl-item">
+        <p class="cl-label">Default — page 1 of 12</p>
+        <nav class="pagination" role="navigation" aria-label="Pagination">
+          <ul class="pagination__list" role="list">
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--arrow pagination__link--disabled" href="#" aria-label="Previous page" aria-disabled="true" tabindex="-1">
+                <span class="svg-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                </span>
+              </a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--current" href="#" aria-current="page" aria-label="Page 1">1</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 2">2</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 3">3</a>
+            </li>
+            <li class="pagination__item">
+              <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 12">12</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--arrow" href="#" aria-label="Next page">
+                <span class="svg-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">Middle page — page 6 of 12</p>
+        <nav class="pagination" role="navigation" aria-label="Pagination">
+          <ul class="pagination__list" role="list">
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--arrow" href="#" aria-label="Previous page">
+                <span class="svg-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                </span>
+              </a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 1">1</a>
+            </li>
+            <li class="pagination__item">
+              <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 5">5</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--current" href="#" aria-current="page" aria-label="Page 6">6</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 7">7</a>
+            </li>
+            <li class="pagination__item">
+              <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 12">12</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--arrow" href="#" aria-label="Next page">
+                <span class="svg-wrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                </span>
+              </a>
+            </li>
+          </ul>
         </nav>
       </div>
     </div>
+  </section>
 
-    {%- comment -%} ============================================================
-      ICONS
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="icons">
-      <div class="cl-section-title">Icons</div>
-      <p class="cl-note">Icons render via <code>{% raw %}{% render 'icon', icon: 'name' %}{% endraw %}</code>. Available icons are listed in <code>snippets/icon.liquid</code>.</p>
 
-      <div class="cl-row" style="flex-wrap: wrap; gap: var(--gap-lg); margin-top: var(--margin-xl);">
-        {%- assign icon_list = 'search,cart,account,close,caret,chevron-right,plus,minus,checkmark,star,heart,share,play,pause,zoom,trash,edit,info,warning,error,success,gift' | split: ',' -%}
-        {%- for icon_name in icon_list -%}
-          <div class="cl-item" style="align-items: center; gap: 4px;">
-            <div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
-              {% render 'icon', icon: icon_name %}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 09 — ICONS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-icons" class="cl-section">
+    <p class="cl-eyebrow">09</p>
+    <h2 class="h2 cl-section-title">Icons</h2>
+    <p class="paragraph" style="margin-block-end: var(--margin-4xl);">Rendered via <code>{%- raw -%}{% render 'icon', icon: 'name' %}{%- endraw -%}</code> from <code>snippets/icon.liquid</code>. 70 icons available.</p>
+
+    <div class="cl-icon-grid">
+      {%- assign cl_icons = '3d-model,apple,arrow,banana,bluesky,bottle,box,caret,carrot,chat_bubble,check_box,clipboard,dairy,dairy_free,discord,double-sided-caret,dryer,error,eye,facebook,fire,gluten_free,heart,instagram,iron,leaf,leather,lightning_bolt,linkedin,lipstick,lock,map_pin,mastodon,next,nut_free,pants,paw_print,pepper,perfume,pinterest,plane,plant,previous,price_tag,question_mark,recycle,reddit,return,ruler,serving_dish,shirt,shoe,silhouette,snapchat,snowflake,spotify,star,stopwatch,telegram,threads,tiktok,truck,tumblr,twitch,twitter,vimeo,washing,whatsapp,x,youtube' | split: ',' -%}
+      {%- for cl_icon in cl_icons -%}
+        <div class="cl-icon-item">
+          <span class="svg-wrapper">{% render 'icon', icon: cl_icon %}</span>
+          <span class="cl-icon-name">{{ cl_icon }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <h3 class="h5" style="margin-block: var(--margin-4xl) var(--margin-lg);">SVG Wrapper size variants</h3>
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.svg-wrapper--smaller (--icon-size-2xs)</p>
+        <span class="svg-wrapper svg-wrapper--smaller">{% render 'icon', icon: 'star' %}</span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.svg-wrapper--small (--icon-size-xs)</p>
+        <span class="svg-wrapper svg-wrapper--small">{% render 'icon', icon: 'star' %}</span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.svg-wrapper (--icon-size-sm, default)</p>
+        <span class="svg-wrapper">{% render 'icon', icon: 'star' %}</span>
+      </div>
+    </div>
+
+    <h3 class="h5" style="margin-block: var(--margin-4xl) var(--margin-lg);">System icon classes</h3>
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.icon-success</p>
+        <svg class="icon-success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 9"/></svg>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-error</p>
+        <svg class="icon-error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-caret (down)</p>
+        <span class="svg-wrapper">
+          <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-caret--forward</p>
+        <span class="svg-wrapper">
+          <svg class="icon-caret icon-caret--forward" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-plus (closed)</p>
+        <span class="icon-plus">
+          <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+        </span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.flip-x on .svg-wrapper</p>
+        <span class="svg-wrapper flip-x">{% render 'icon', icon: 'arrow' %}</span>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 10 — DIVIDERS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-dividers" class="cl-section">
+    <p class="cl-eyebrow">10</p>
+    <h2 class="h2 cl-section-title">Dividers</h2>
+
+    <div class="cl-row cl-row--col">
+      <div class="cl-item">
+        <p class="cl-label">1px hairline (default)</p>
+        <div class="divider spacing-style" style="--divider-thickness: 1px; --divider-width: 100%; --divider-rounding: 0;">
+          <div class="divider__line"></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">3px thick</p>
+        <div class="divider spacing-style" style="--divider-thickness: 3px; --divider-width: 100%; --divider-rounding: 0;">
+          <div class="divider__line"></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">50% width, centered</p>
+        <div class="divider spacing-style" style="--divider-thickness: 1px; --divider-width: 50%; --divider-rounding: 0; display: flex; justify-content: center;">
+          <div class="divider__line"></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">Pill (4px × 64px, fully rounded)</p>
+        <div class="divider spacing-style" style="--divider-thickness: 4px; --divider-width: 64px; --divider-rounding: 9999px; display: flex; justify-content: center;">
+          <div class="divider__line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 11 — BADGES & PILLS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-badges" class="cl-section">
+    <p class="cl-eyebrow">11</p>
+    <h2 class="h2 cl-section-title">Badges &amp; Pills</h2>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.bubble — count badge</p>
+        <div class="cl-demo">
+          <div style="display: flex; align-items: center; gap: var(--gap-xl);">
+            <div style="position: relative; display: inline-block;">
+              <span class="svg-wrapper">{% render 'icon', icon: 'heart' %}</span>
+              <span class="bubble" style="position: absolute; top: -6px; right: -6px; min-width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; padding-inline: 4px;">3</span>
             </div>
-            <div class="cl-label" style="margin-bottom: 0;">{{ icon_name }}</div>
+            <div style="position: relative; display: inline-block;">
+              <span class="svg-wrapper">{% render 'icon', icon: 'box' %}</span>
+              <span class="bubble" style="position: absolute; top: -6px; right: -6px; min-width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; padding-inline: 4px;">99</span>
+            </div>
           </div>
-        {%- endfor -%}
+        </div>
       </div>
-    </div>
 
-    {%- comment -%} ============================================================
-      DIVIDERS
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="dividers">
-      <div class="cl-section-title">Dividers</div>
-      <p class="cl-note">Dividers render via the <code>divider</code> section or <code>snippets/divider.liquid</code>. Style is controlled by section schema settings.</p>
-
-      <div style="margin-top: var(--margin-xl); display: flex; flex-direction: column; gap: var(--gap-xl);">
-        <div>
-          <div class="cl-label">1px Border</div>
-          <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--margin-md) 0;">
-        </div>
-        <div>
-          <div class="cl-label">2px Border</div>
-          <hr style="border: none; border-top: 2px solid var(--color-border); margin: var(--margin-md) 0;">
-        </div>
-        <div>
-          <div class="cl-label">Foreground Color</div>
-          <hr style="border: none; border-top: 1px solid var(--color-foreground); margin: var(--margin-md) 0;">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.cart-bubble — cart count indicator</p>
+        <div class="cl-demo">
+          <div style="display: flex; align-items: center; gap: var(--gap-xl);">
+            <div class="cart-bubble">
+              <div class="cart-bubble__background"></div>
+              <div class="cart-bubble__text">
+                <span class="cart-bubble__text-count">3</span>
+              </div>
+            </div>
+            <div class="cart-bubble">
+              <div class="cart-bubble__background"></div>
+              <div class="cart-bubble__text">
+                <span class="cart-bubble__text-count">12</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    {%- comment -%} ============================================================
-      WEB COMPONENTS INVENTORY
-    ============================================================ {%- endcomment -%}
-    <div class="cl-section" id="web-components">
-      <div class="cl-section-title">Web Components Inventory</div>
-      <p class="cl-note">All custom elements registered by Tinker. These require real Shopify context (products, cart, collections) to render interactively. Use for reference when auditing what Tinker already provides before adding custom components from the design system.</p>
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.pills__pill — filter/facet pills</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs);">
+            <button class="pills__pill" type="button">All Products</button>
+            <button class="pills__pill" type="button">Vitamins</button>
+            <button class="pills__pill" type="button">Minerals</button>
+            <button class="pills__pill" type="button">Adaptogens</button>
+            <button class="pills__pill" type="button">Nootropics</button>
+          </div>
+        </div>
+      </div>
 
-      <div class="cl-web-component-list" style="margin-top: var(--margin-xl);">
-        <div class="cl-web-component-item">accordion-custom</div>
-        <div class="cl-web-component-item">add-to-cart-component</div>
-        <div class="cl-web-component-item">anchored-popover-component</div>
-        <div class="cl-web-component-item">announcement-bar-component</div>
-        <div class="cl-web-component-item">blog-posts-list</div>
-        <div class="cl-web-component-item">cart-discount-component</div>
-        <div class="cl-web-component-item">cart-drawer-component</div>
-        <div class="cl-web-component-item">cart-icon</div>
-        <div class="cl-web-component-item">cart-items-component</div>
-        <div class="cl-web-component-item">cart-note</div>
-        <div class="cl-web-component-item">cart-quantity-selector-component</div>
-        <div class="cl-web-component-item">collection-component</div>
-        <div class="cl-web-component-item">collection-links-component</div>
-        <div class="cl-web-component-item">comparison-slider-component</div>
-        <div class="cl-web-component-item">copy-to-clipboard-component</div>
-        <div class="cl-web-component-item">deferred-media</div>
-        <div class="cl-web-component-item">dialog-component</div>
-        <div class="cl-web-component-item">facet-clear-component</div>
-        <div class="cl-web-component-item">facet-inputs-component</div>
-        <div class="cl-web-component-item">facets-form-component</div>
-        <div class="cl-web-component-item">floating-panel-component</div>
-        <div class="cl-web-component-item">fly-to-cart</div>
-        <div class="cl-web-component-item">header-actions</div>
-        <div class="cl-web-component-item">header-component</div>
-        <div class="cl-web-component-item">header-drawer</div>
-        <div class="cl-web-component-item">header-menu</div>
-        <div class="cl-web-component-item">jumbo-text</div>
-        <div class="cl-web-component-item">layered-slideshow-component</div>
-        <div class="cl-web-component-item">local-pickup</div>
-        <div class="cl-web-component-item">marquee-component</div>
-        <div class="cl-web-component-item">media-gallery</div>
-        <div class="cl-web-component-item">overflow-list</div>
-        <div class="cl-web-component-item">predictive-search-component</div>
-        <div class="cl-web-component-item">price-facet-component</div>
-        <div class="cl-web-component-item">product-card</div>
-        <div class="cl-web-component-item">product-card-link</div>
-        <div class="cl-web-component-item">product-component</div>
-        <div class="cl-web-component-item">product-form-component</div>
-        <div class="cl-web-component-item">product-hotspot-component</div>
-        <div class="cl-web-component-item">product-inventory</div>
-        <div class="cl-web-component-item">product-model</div>
-        <div class="cl-web-component-item">product-price</div>
-        <div class="cl-web-component-item">product-recommendations</div>
-        <div class="cl-web-component-item">quantity-selector-component</div>
-        <div class="cl-web-component-item">quick-add-component</div>
-        <div class="cl-web-component-item">quick-add-dialog</div>
-        <div class="cl-web-component-item">quick-order-list-component</div>
-        <div class="cl-web-component-item">results-list</div>
-        <div class="cl-web-component-item">search-page-input-component</div>
-        <div class="cl-web-component-item">show-more-component</div>
-        <div class="cl-web-component-item">slideshow-component</div>
-        <div class="cl-web-component-item">sorting-filter-component</div>
-        <div class="cl-web-component-item">sticky-add-to-cart</div>
-        <div class="cl-web-component-item">swatches-variant-picker-component</div>
-        <div class="cl-web-component-item">text-component</div>
-        <div class="cl-web-component-item">theme-drawer</div>
-        <div class="cl-web-component-item">variant-picker</div>
-        <div class="cl-web-component-item">video-background-component</div>
-        <div class="cl-web-component-item">volume-pricing</div>
-        <div class="cl-web-component-item">zoom-dialog</div>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.pills__pill--swatch — pills with color</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <button class="pills__pill pills__pill--swatch" type="button">
+              <span class="swatch swatch--unscaled" style="--swatch-background: #E63946;"></span>
+              Red
+            </button>
+            <button class="pills__pill pills__pill--swatch" type="button">
+              <span class="swatch swatch--unscaled" style="--swatch-background: #457B9D;"></span>
+              Blue
+            </button>
+            <button class="pills__pill pills__pill--swatch" type="button">
+              <span class="swatch swatch--unscaled" style="--swatch-background: #2D6A4F;"></span>
+              Green
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 12 — MEDIA {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-media" class="cl-section">
+    <p class="cl-eyebrow">12</p>
+    <h2 class="h2 cl-section-title">Media &amp; Layout</h2>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.bento-box.bento-box--items-3</p>
+        <div class="cl-demo">
+          <div class="bento-box bento-box--items-3" style="height: 220px;">
+            <div class="bento-box__item" style="background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); display: flex; align-items: center; justify-content: center;">
+              <span class="paragraph">Item 1</span>
+            </div>
+            <div class="bento-box__item" style="background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5)); border-radius: var(--style-border-radius-xs); display: flex; align-items: center; justify-content: center;">
+              <span class="paragraph">Item 2</span>
+            </div>
+            <div class="bento-box__item" style="background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); display: flex; align-items: center; justify-content: center;">
+              <span class="paragraph">Item 3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.overlay.overlay--gradient on a content block</p>
+        <div class="cl-demo" style="padding: 0; overflow: hidden; border-radius: var(--style-border-radius-sm);">
+          <div style="position: relative; height: 180px; background-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));">
+            <div class="overlay overlay--gradient"></div>
+            <div style="position: absolute; inset: 0; display: flex; align-items: flex-end; padding: var(--padding-md); z-index: 1;">
+              <p class="paragraph" style="color: var(--color-white);">Caption over gradient overlay</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-  </div>
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.section height modifiers</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.section--height-small → 15rem / 40svh / 50svh</code>
+            <code>.section--height-medium → 25rem / 55svh / 65svh</code>
+            <code>.section--height-large → 35rem / 70svh / 80svh</code>
+            <code>.section--height-full-screen → 100svh</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.layout-panel-flex variants</p>
+        <div class="cl-demo">
+          <div class="layout-panel-flex layout-panel-flex--row" style="gap: var(--gap-md); --gap: var(--gap-md);">
+            <div style="padding: var(--padding-sm); background: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); flex: 1; text-align: center; font-size: var(--font-size--sm); font-family: var(--font-body--family);">Block A</div>
+            <div style="padding: var(--padding-sm); background: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); flex: 1; text-align: center; font-size: var(--font-size--sm); font-family: var(--font-body--family);">Block B</div>
+            <div style="padding: var(--padding-sm); background: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); flex: 1; text-align: center; font-size: var(--font-size--sm); font-family: var(--font-body--family);">Block C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 13 — UTILITY CLASSES {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-utilities" class="cl-section">
+    <p class="cl-eyebrow">13</p>
+    <h2 class="h2 cl-section-title">Utility Classes</h2>
+
+    <div class="cl-two-col">
+      <div>
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Display &amp; Visibility</h3>
+        <div class="cl-demo" style="margin-block-end: var(--margin-4xl);">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.hidden — display: none !important</code>
+            <code>.hidden--mobile — hidden at max-width 749px</code>
+            <code>.hidden--desktop — hidden at min-width 750px</code>
+            <code>.visually-hidden — visible to screen readers only</code>
+            <code>.is-visually-hidden-mobile — screen-reader only on mobile</code>
+            <code>.hide-when-empty — hidden when :empty</code>
+            <code>.contents — display: contents</code>
+            <code>.relative — position: relative</code>
+          </div>
+        </div>
+
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Background Images</h3>
+        <div class="cl-demo">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.background-image-container — absolute fill, object-fit: cover</code>
+            <code>.background-image-fit — object-fit: contain</code>
+            <code>.container-background-image — bg-size: cover, no-repeat</code>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Transition Helpers</h3>
+        <div class="cl-demo" style="margin-block-end: var(--margin-4xl);">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.transition-background-color — speed-medium ease-in-out</code>
+            <code>.transition-transform — speed-medium timing-bounce</code>
+            <code>.transition-border-color — speed-medium timing-hover</code>
+          </div>
+        </div>
+
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Spacing System Classes</h3>
+        <div class="cl-demo">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.spacing-style — reads --padding-block-* and --margin-block-* vars</code>
+            <code>.inherit-spacing — inherits spacing from parent .spacing-style</code>
+            <code>.gap-style — sets gap from --gap var (scales with --gap-scale)</code>
+            <code>.size-style — reads --size-style-width / --size-style-height vars</code>
+            <code>.border-style — reads --border-width / --border-color / --border-radius</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 14 — WEB COMPONENTS INVENTORY {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-web-components" class="cl-section">
+    <p class="cl-eyebrow">14</p>
+    <h2 class="h2 cl-section-title">Web Components</h2>
+    <p class="paragraph" style="margin-block-end: var(--margin-4xl);">All custom elements registered via <code>customElements.define()</code> in the Tinker theme. Each component follows the Shopify Dawn pattern — vanilla JS, no framework.</p>
+
+    <table class="cl-wc-table">
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Source File</th>
+          <th>Key Attributes / Refs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>&lt;product-card&gt;</td>
+          <td>product-card.js</td>
+          <td>data-product-transition, data-featured-media-url, data-no-navigation — ref: productCardLink (required), slideshow, quickAdd, cardGallery</td>
+        </tr>
+        <tr>
+          <td>&lt;quick-add-component&gt;</td>
+          <td>quick-add.js</td>
+          <td>data-product-title, data-product-options-count — opens &lt;quick-add-dialog&gt; modal</td>
+        </tr>
+        <tr>
+          <td>&lt;quick-add-dialog&gt;</td>
+          <td>quick-add.js</td>
+          <td>Modal dialog — child: #quick-add-modal-content[data-product-grid-content]</td>
+        </tr>
+        <tr>
+          <td>&lt;slideshow-component&gt;</td>
+          <td>slideshow.js</td>
+          <td>autoplay="{s}", infinite, initial-slide, mobile-disabled, auto-hide-controls — ref: scroller (req), slideshowContainer (req), slides, previous, next, dots, thumbnails</td>
+        </tr>
+        <tr>
+          <td>&lt;slideshow-slide&gt;</td>
+          <td>slideshow.js</td>
+          <td>ref="slides", slide-id, aria-hidden, variant-image — child of &lt;slideshow-component&gt;</td>
+        </tr>
+        <tr>
+          <td>&lt;accordion-custom&gt;</td>
+          <td>accordion-custom.js</td>
+          <td>data-disable-on-mobile, data-disable-on-desktop, data-close-with-escape, open-by-default-on-mobile, open-by-default-on-desktop — requires child &lt;details&gt;&lt;summary&gt;</td>
+        </tr>
+        <tr>
+          <td>&lt;marquee-component&gt;</td>
+          <td>marquee.js</td>
+          <td>data-speed-factor (required) — ref: wrapper (req), content (req), marqueeItems (multiple, req)</td>
+        </tr>
+        <tr>
+          <td>&lt;jumbo-text&gt;</td>
+          <td>jumbo-text.js</td>
+          <td>data-text-effect, data-animation-repeat, data-cap-text — scales font-size to fill container width</td>
+        </tr>
+        <tr>
+          <td>&lt;quantity-selector-component&gt;</td>
+          <td>component-quantity-selector.js</td>
+          <td>ref: quantityInput (req), minusButton (req), plusButton (req) — emits QuantitySelectorUpdateEvent</td>
+        </tr>
+        <tr>
+          <td>&lt;product-price&gt;</td>
+          <td>(inline web component)</td>
+          <td>Manages .price__regular / .price__sale / .price__hidden visibility — children: .tax-note, .volume-pricing-note</td>
+        </tr>
+        <tr>
+          <td>&lt;media-gallery&gt;</td>
+          <td>(inline web component)</td>
+          <td>Gallery grid controller — children: .media-gallery__grid, .product-media-container — uses --gallery-aspect-ratio, --image-gap</td>
+        </tr>
+        <tr>
+          <td>&lt;deferred-media&gt;</td>
+          <td>(inline web component)</td>
+          <td>Lazy-loads video/iframe on interaction — states: [data-media-loaded] — children: .deferred-media__poster-button, template</td>
+        </tr>
+        <tr>
+          <td>&lt;product-model&gt;</td>
+          <td>(inline web component)</td>
+          <td>Wraps Shopify model-viewer — children: model-viewer, .deferred-media__poster-button</td>
+        </tr>
+        <tr>
+          <td>&lt;fly-to-cart&gt;</td>
+          <td>(inline web component)</td>
+          <td>Animated product-to-cart fly animation — modifiers: --main, --quick, --sticky — uses --offset-y, --width, --start-x/y, --travel-x/y</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+
 </div>
 
 {% schema %}
 {
   "name": "Component Library",
-  "tag": "div",
-  "settings": []
+  "class": "component-library",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Component Library"
+    }
+  ]
 }
 {% endschema %}
