@@ -1,0 +1,711 @@
+{% comment %}
+  Component Library — Development Only
+  Assign this template to a page called "Component Library" in the Shopify admin.
+  URL: /pages/component-library
+  Do not link in navigation.
+{% endcomment %}
+
+<style>
+  .cl-wrap {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  .cl-nav {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border);
+    padding: var(--padding-lg);
+    background: var(--color-background);
+  }
+
+  .cl-nav-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-foreground-subdued);
+    margin-bottom: var(--margin-md);
+  }
+
+  .cl-nav a {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-foreground);
+    text-decoration: none;
+    padding: 4px 0;
+    border-left: 2px solid transparent;
+    padding-left: var(--padding-sm);
+    transition: all var(--animation-speed);
+  }
+
+  .cl-nav a:hover {
+    border-left-color: var(--color-primary-button-background);
+    color: var(--color-primary-button-background);
+  }
+
+  .cl-content {
+    padding: var(--padding-5xl) var(--padding-4xl);
+    max-width: 900px;
+  }
+
+  .cl-header {
+    margin-bottom: var(--margin-6xl);
+    padding-bottom: var(--padding-4xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cl-header h1 {
+    margin-bottom: var(--margin-sm);
+  }
+
+  .cl-header p {
+    color: var(--color-foreground-subdued);
+    font-size: 0.9rem;
+  }
+
+  .cl-section {
+    margin-bottom: var(--margin-6xl);
+    padding-bottom: var(--padding-6xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cl-section:last-child {
+    border-bottom: none;
+  }
+
+  .cl-section-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-foreground-subdued);
+    margin-bottom: var(--margin-4xl);
+    padding-bottom: var(--padding-xs);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cl-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--gap-lg);
+    margin-bottom: var(--margin-4xl);
+  }
+
+  .cl-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .cl-label {
+    font-size: 0.65rem;
+    color: var(--color-foreground-subdued);
+    margin-bottom: var(--margin-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .cl-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cl-card-mock {
+    width: 220px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--style-border-radius-sm);
+    overflow: hidden;
+    background: var(--color-background);
+  }
+
+  .cl-card-image-mock {
+    height: 160px;
+    background: var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-foreground-subdued);
+    font-size: 0.75rem;
+  }
+
+  .cl-card-body {
+    padding: var(--padding-md);
+  }
+
+  .cl-card-brand {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-foreground-subdued);
+    margin-bottom: var(--margin-xs);
+  }
+
+  .cl-card-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: var(--margin-xs);
+  }
+
+  .cl-swatch-group {
+    display: flex;
+    gap: var(--gap-xs);
+    margin-bottom: var(--margin-sm);
+  }
+
+  .cl-note {
+    font-size: 0.75rem;
+    color: var(--color-foreground-subdued);
+    font-style: italic;
+    margin-top: var(--margin-sm);
+  }
+
+  .cl-web-component-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-sm);
+  }
+
+  .cl-web-component-item {
+    font-family: monospace;
+    font-size: 0.75rem;
+    padding: var(--padding-xs) var(--padding-sm);
+    background: var(--color-border);
+    border-radius: var(--style-border-radius-xs);
+    color: var(--color-foreground);
+  }
+</style>
+
+<div class="cl-wrap">
+
+  {%- comment -%} Sidebar Nav {%- endcomment -%}
+  <nav class="cl-nav">
+    <div class="cl-nav-title">Components</div>
+    <a href="#typography">Typography</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#inputs">Inputs & Forms</a>
+    <a href="#quantity">Quantity Selector</a>
+    <a href="#price">Price Display</a>
+    <a href="#swatches">Swatches & Pills</a>
+    <a href="#accordion">Accordion</a>
+    <a href="#product-card">Product Card</a>
+    <a href="#pagination">Pagination</a>
+    <a href="#icons">Icons</a>
+    <a href="#dividers">Dividers</a>
+    <a href="#web-components">Web Components</a>
+  </nav>
+
+  {%- comment -%} Main Content {%- endcomment -%}
+  <div class="cl-content">
+
+    <div class="cl-header">
+      <h1>Tinker Component Library</h1>
+      <p>All default Tinker theme components and styles. Development reference only — do not link in navigation.</p>
+    </div>
+
+    {%- comment -%} ============================================================
+      TYPOGRAPHY
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="typography">
+      <div class="cl-section-title">Typography</div>
+
+      <div class="cl-row" style="flex-direction: column; gap: var(--gap-md);">
+        <div>
+          <div class="cl-label">H1</div>
+          <h1>The quick brown fox</h1>
+        </div>
+        <div>
+          <div class="cl-label">H2</div>
+          <h2>The quick brown fox</h2>
+        </div>
+        <div>
+          <div class="cl-label">H3</div>
+          <h3>The quick brown fox</h3>
+        </div>
+        <div>
+          <div class="cl-label">H4</div>
+          <h4>The quick brown fox</h4>
+        </div>
+        <div>
+          <div class="cl-label">H5</div>
+          <h5>The quick brown fox</h5>
+        </div>
+        <div>
+          <div class="cl-label">H6</div>
+          <h6>The quick brown fox</h6>
+        </div>
+        <div>
+          <div class="cl-label">Body — Paragraph</div>
+          <p>The quick brown fox jumps over the lazy dog. Shopify themes are flexible systems for building commerce experiences. This is standard paragraph body copy at the default font size and line height.</p>
+        </div>
+        <div>
+          <div class="cl-label">Link</div>
+          <a href="#">This is a text link</a>
+        </div>
+        <div>
+          <div class="cl-label">Small / Caption</div>
+          <small>The quick brown fox jumps over the lazy dog.</small>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      BUTTONS
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="buttons">
+      <div class="cl-section-title">Buttons</div>
+
+      <div class="cl-row">
+        <div class="cl-item">
+          <div class="cl-label">Primary (.button)</div>
+          <button class="button" type="button">Primary Button</button>
+        </div>
+        <div class="cl-item">
+          <div class="cl-label">Secondary (.button-secondary)</div>
+          <button class="button-secondary" type="button">Secondary Button</button>
+        </div>
+        <div class="cl-item">
+          <div class="cl-label">Unstyled (.button-unstyled)</div>
+          <button class="button-unstyled" type="button">Unstyled Button</button>
+        </div>
+      </div>
+
+      <div class="cl-row">
+        <div class="cl-item">
+          <div class="cl-label">Primary — Disabled</div>
+          <button class="button" type="button" disabled>Disabled</button>
+        </div>
+        <div class="cl-item">
+          <div class="cl-label">Secondary — Disabled</div>
+          <button class="button-secondary" type="button" disabled>Disabled</button>
+        </div>
+        <div class="cl-item">
+          <div class="cl-label">Primary — aria-disabled</div>
+          <button class="button" type="button" aria-disabled="true">Aria Disabled</button>
+        </div>
+      </div>
+
+      <div class="cl-row">
+        <div class="cl-item">
+          <div class="cl-label">Unstyled with Icon (.button-unstyled--with-icon)</div>
+          <button class="button-unstyled button-unstyled--with-icon" type="button">
+            {% render 'icon', icon: 'search' %}
+            Search
+          </button>
+        </div>
+        <div class="cl-item">
+          <div class="cl-label">Transparent (.button-unstyled--transparent)</div>
+          <button class="button-unstyled button-unstyled--transparent" type="button">Transparent</button>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      INPUTS & FORMS
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="inputs">
+      <div class="cl-section-title">Inputs & Forms</div>
+
+      <div class="cl-row" style="flex-direction: column; gap: var(--gap-lg); max-width: 400px;">
+
+        <div class="cl-item" style="width: 100%;">
+          <div class="cl-label">Text Input (.field)</div>
+          <div class="field">
+            <input class="field__input" type="text" id="cl-input-1" placeholder=" ">
+            <label class="field__label" for="cl-input-1">Label</label>
+          </div>
+        </div>
+
+        <div class="cl-item" style="width: 100%;">
+          <div class="cl-label">Text Input — Filled</div>
+          <div class="field">
+            <input class="field__input" type="text" id="cl-input-2" value="Filled value" placeholder=" ">
+            <label class="field__label" for="cl-input-2">Label</label>
+          </div>
+        </div>
+
+        <div class="cl-item" style="width: 100%;">
+          <div class="cl-label">Email Input</div>
+          <div class="field">
+            <input class="field__input" type="email" id="cl-input-3" placeholder=" ">
+            <label class="field__label" for="cl-input-3">Email Address</label>
+          </div>
+        </div>
+
+        <div class="cl-item" style="width: 100%;">
+          <div class="cl-label">Textarea</div>
+          <div class="field">
+            <textarea class="field__input" id="cl-textarea-1" rows="4" placeholder=" "></textarea>
+            <label class="field__label" for="cl-textarea-1">Message</label>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <div class="cl-label">Checkbox (.checkbox)</div>
+          <div class="checkbox">
+            <input class="checkbox__input" type="checkbox" id="cl-checkbox-1">
+            <label class="checkbox__label" for="cl-checkbox-1">
+              <span class="checkbox__label-text">I agree to the terms</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <div class="cl-label">Checkbox — Checked</div>
+          <div class="checkbox">
+            <input class="checkbox__input" type="checkbox" id="cl-checkbox-2" checked>
+            <label class="checkbox__label" for="cl-checkbox-2">
+              <span class="checkbox__label-text">This one is checked</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <div class="cl-label">Checkbox — Disabled</div>
+          <div class="checkbox">
+            <input class="checkbox__input" type="checkbox" id="cl-checkbox-3" disabled>
+            <label class="checkbox__label" for="cl-checkbox-3">
+              <span class="checkbox__label-text">Disabled checkbox</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      QUANTITY SELECTOR
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="quantity">
+      <div class="cl-section-title">Quantity Selector</div>
+
+      <div class="cl-row">
+        <div class="cl-item">
+          <div class="cl-label">Default (.quantity-selector)</div>
+          <div class="quantity-selector">
+            <button class="quantity-minus button-unstyled" type="button" aria-label="Decrease quantity">
+              <span class="svg-wrapper">{% render 'icon', icon: 'minus' %}</span>
+            </button>
+            <input type="number" class="" value="1" min="1" aria-label="Quantity">
+            <button class="quantity-plus button-unstyled" type="button" aria-label="Increase quantity">
+              <span class="svg-wrapper">{% render 'icon', icon: 'plus' %}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      PRICE DISPLAY
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="price">
+      <div class="cl-section-title">Price Display</div>
+
+      <div class="cl-row">
+        <div class="cl-item">
+          <div class="cl-label">Regular Price (.price)</div>
+          <div class="price">
+            <span class="price-item price-item--regular">$49.99</span>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <div class="cl-label">Sale Price (.price-item--sale)</div>
+          <div class="price price--on-sale">
+            <div class="price-item__group">
+              <span class="price-item price-item--sale">$34.99</span>
+              <s class="price-item price-item--regular">$49.99</s>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      SWATCHES & PILLS
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="swatches">
+      <div class="cl-section-title">Swatches & Option Pills</div>
+
+      <div class="cl-row" style="flex-direction: column; gap: var(--gap-lg);">
+
+        <div class="cl-item">
+          <div class="cl-label">Color Swatches (.swatch)</div>
+          <div class="cl-swatch-group">
+            <span class="swatch" style="background-color: #0C8234;" title="Forest Green" aria-label="Forest Green"></span>
+            <span class="swatch" style="background-color: #0BDA51;" title="Malachite" aria-label="Malachite"></span>
+            <span class="swatch" style="background-color: #131313;" title="Near Black" aria-label="Near Black"></span>
+            <span class="swatch" style="background-color: #F0EFEF;" title="Platinum" aria-label="Platinum"></span>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <div class="cl-label">Option Pills (.pills__pill)</div>
+          <div style="display: flex; gap: var(--gap-xs); flex-wrap: wrap;">
+            <button class="pills__pill" type="button">Small</button>
+            <button class="pills__pill" type="button">Medium</button>
+            <button class="pills__pill" type="button">Large</button>
+            <button class="pills__pill" type="button" disabled>X-Large</button>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <div class="cl-label">Small Pills (.pills__pill--desktop-small)</div>
+          <div style="display: flex; gap: var(--gap-xs); flex-wrap: wrap;">
+            <button class="pills__pill pills__pill--desktop-small" type="button">30ct</button>
+            <button class="pills__pill pills__pill--desktop-small" type="button">60ct</button>
+            <button class="pills__pill pills__pill--desktop-small" type="button">90ct</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      ACCORDION
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="accordion">
+      <div class="cl-section-title">Accordion</div>
+
+      <div style="max-width: 500px;">
+
+        {%- capture accordion_1 -%}
+          <details>
+            <summary style="cursor: pointer; padding: var(--padding-md) 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
+              What are the ingredients?
+              <span class="icon-caret">{% render 'icon', icon: 'caret' %}</span>
+            </summary>
+            <div class="details-content" style="padding: var(--padding-md) 0;">
+              <p>This product contains a proprietary blend of vitamins, minerals, and botanical extracts. See full label for complete ingredient list.</p>
+            </div>
+          </details>
+        {%- endcapture -%}
+        {% render 'accordion-custom-component', children: accordion_1, close_with_escape: true %}
+
+        {%- capture accordion_2 -%}
+          <details>
+            <summary style="cursor: pointer; padding: var(--padding-md) 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
+              How should I take this supplement?
+              <span class="icon-caret">{% render 'icon', icon: 'caret' %}</span>
+            </summary>
+            <div class="details-content" style="padding: var(--padding-md) 0;">
+              <p>Take two capsules daily with a meal. Do not exceed the recommended dose. Consult your healthcare provider before use.</p>
+            </div>
+          </details>
+        {%- endcapture -%}
+        {% render 'accordion-custom-component', children: accordion_2, close_with_escape: true %}
+
+        {%- capture accordion_3 -%}
+          <details open>
+            <summary style="cursor: pointer; padding: var(--padding-md) 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--color-border);">
+              Open by default
+              <span class="icon-caret">{% render 'icon', icon: 'caret' %}</span>
+            </summary>
+            <div class="details-content" style="padding: var(--padding-md) 0;">
+              <p>This accordion item starts open. The <code>open</code> attribute on the <code>details</code> element controls this.</p>
+            </div>
+          </details>
+        {%- endcapture -%}
+        {% render 'accordion-custom-component', children: accordion_3, open: true, close_with_escape: true %}
+
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      PRODUCT CARD MOCK
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="product-card">
+      <div class="cl-section-title">Product Card</div>
+      <p class="cl-note">Static mock using Tinker's card structure. Live product cards render via the <code>product-card</code> web component with real product data.</p>
+
+      <div class="cl-row" style="margin-top: var(--margin-xl);">
+
+        <div class="cl-card-mock">
+          <div class="cl-card-image-mock">Image placeholder</div>
+          <div class="cl-card-body">
+            <div class="cl-card-brand">NeuroSolution</div>
+            <div class="cl-card-title">Omega-3 Fish Oil 1000mg</div>
+            <div class="price" style="margin-top: var(--margin-xs); margin-bottom: var(--margin-sm);">
+              <span class="price-item price-item--regular">$39.99</span>
+            </div>
+            <div class="cl-swatch-group" style="margin-bottom: var(--margin-sm);">
+              <span class="swatch" style="background-color: #0C8234;" title="Green"></span>
+              <span class="swatch" style="background-color: #131313;" title="Black"></span>
+            </div>
+            <button class="button" type="button" style="width: 100%;">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="cl-card-mock">
+          <div class="cl-card-image-mock">Image placeholder</div>
+          <div class="cl-card-body">
+            <div class="cl-card-brand">NeuroSolution</div>
+            <div class="cl-card-title">Magnesium Glycinate 400mg</div>
+            <div class="price price--on-sale" style="margin-top: var(--margin-xs); margin-bottom: var(--margin-sm);">
+              <div class="price-item__group">
+                <span class="price-item price-item--sale">$29.99</span>
+                <s class="price-item price-item--regular">$44.99</s>
+              </div>
+            </div>
+            <div style="display: flex; gap: var(--gap-xs); margin-bottom: var(--margin-sm);">
+              <button class="pills__pill pills__pill--desktop-small" type="button">60ct</button>
+              <button class="pills__pill pills__pill--desktop-small" type="button">120ct</button>
+            </div>
+            <button class="button" type="button" style="width: 100%;">Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      PAGINATION
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="pagination">
+      <div class="cl-section-title">Pagination</div>
+      <p class="cl-note">Pagination renders via the <code>pagination-controls</code> snippet using the Liquid <code>paginate</code> object. Static structure shown below.</p>
+
+      <div style="margin-top: var(--margin-xl);">
+        <nav aria-label="Pagination">
+          <div style="display: flex; gap: var(--gap-xs); align-items: center;">
+            <button class="button-secondary" type="button" aria-label="Previous page">
+              {% render 'icon', icon: 'caret' %}
+            </button>
+            <button class="button-secondary" type="button" aria-current="false">1</button>
+            <button class="button" type="button" aria-current="page">2</button>
+            <button class="button-secondary" type="button" aria-current="false">3</button>
+            <button class="button-secondary" type="button" aria-label="Next page">
+              {% render 'icon', icon: 'caret' %}
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      ICONS
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="icons">
+      <div class="cl-section-title">Icons</div>
+      <p class="cl-note">Icons render via <code>{% raw %}{% render 'icon', icon: 'name' %}{% endraw %}</code>. Available icons are listed in <code>snippets/icon.liquid</code>.</p>
+
+      <div class="cl-row" style="flex-wrap: wrap; gap: var(--gap-lg); margin-top: var(--margin-xl);">
+        {%- assign icon_list = 'search,cart,account,close,caret,chevron-right,plus,minus,checkmark,star,heart,share,play,pause,zoom,trash,edit,info,warning,error,success,gift' | split: ',' -%}
+        {%- for icon_name in icon_list -%}
+          <div class="cl-item" style="align-items: center; gap: 4px;">
+            <div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">
+              {% render 'icon', icon: icon_name %}
+            </div>
+            <div class="cl-label" style="margin-bottom: 0;">{{ icon_name }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      DIVIDERS
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="dividers">
+      <div class="cl-section-title">Dividers</div>
+      <p class="cl-note">Dividers render via the <code>divider</code> section or <code>snippets/divider.liquid</code>. Style is controlled by section schema settings.</p>
+
+      <div style="margin-top: var(--margin-xl); display: flex; flex-direction: column; gap: var(--gap-xl);">
+        <div>
+          <div class="cl-label">1px Border</div>
+          <hr style="border: none; border-top: 1px solid var(--color-border); margin: var(--margin-md) 0;">
+        </div>
+        <div>
+          <div class="cl-label">2px Border</div>
+          <hr style="border: none; border-top: 2px solid var(--color-border); margin: var(--margin-md) 0;">
+        </div>
+        <div>
+          <div class="cl-label">Foreground Color</div>
+          <hr style="border: none; border-top: 1px solid var(--color-foreground); margin: var(--margin-md) 0;">
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} ============================================================
+      WEB COMPONENTS INVENTORY
+    ============================================================ {%- endcomment -%}
+    <div class="cl-section" id="web-components">
+      <div class="cl-section-title">Web Components Inventory</div>
+      <p class="cl-note">All custom elements registered by Tinker. These require real Shopify context (products, cart, collections) to render interactively. Use for reference when auditing what Tinker already provides before adding custom components from the design system.</p>
+
+      <div class="cl-web-component-list" style="margin-top: var(--margin-xl);">
+        <div class="cl-web-component-item">accordion-custom</div>
+        <div class="cl-web-component-item">add-to-cart-component</div>
+        <div class="cl-web-component-item">anchored-popover-component</div>
+        <div class="cl-web-component-item">announcement-bar-component</div>
+        <div class="cl-web-component-item">blog-posts-list</div>
+        <div class="cl-web-component-item">cart-discount-component</div>
+        <div class="cl-web-component-item">cart-drawer-component</div>
+        <div class="cl-web-component-item">cart-icon</div>
+        <div class="cl-web-component-item">cart-items-component</div>
+        <div class="cl-web-component-item">cart-note</div>
+        <div class="cl-web-component-item">cart-quantity-selector-component</div>
+        <div class="cl-web-component-item">collection-component</div>
+        <div class="cl-web-component-item">collection-links-component</div>
+        <div class="cl-web-component-item">comparison-slider-component</div>
+        <div class="cl-web-component-item">copy-to-clipboard-component</div>
+        <div class="cl-web-component-item">deferred-media</div>
+        <div class="cl-web-component-item">dialog-component</div>
+        <div class="cl-web-component-item">facet-clear-component</div>
+        <div class="cl-web-component-item">facet-inputs-component</div>
+        <div class="cl-web-component-item">facets-form-component</div>
+        <div class="cl-web-component-item">floating-panel-component</div>
+        <div class="cl-web-component-item">fly-to-cart</div>
+        <div class="cl-web-component-item">header-actions</div>
+        <div class="cl-web-component-item">header-component</div>
+        <div class="cl-web-component-item">header-drawer</div>
+        <div class="cl-web-component-item">header-menu</div>
+        <div class="cl-web-component-item">jumbo-text</div>
+        <div class="cl-web-component-item">layered-slideshow-component</div>
+        <div class="cl-web-component-item">local-pickup</div>
+        <div class="cl-web-component-item">marquee-component</div>
+        <div class="cl-web-component-item">media-gallery</div>
+        <div class="cl-web-component-item">overflow-list</div>
+        <div class="cl-web-component-item">predictive-search-component</div>
+        <div class="cl-web-component-item">price-facet-component</div>
+        <div class="cl-web-component-item">product-card</div>
+        <div class="cl-web-component-item">product-card-link</div>
+        <div class="cl-web-component-item">product-component</div>
+        <div class="cl-web-component-item">product-form-component</div>
+        <div class="cl-web-component-item">product-hotspot-component</div>
+        <div class="cl-web-component-item">product-inventory</div>
+        <div class="cl-web-component-item">product-model</div>
+        <div class="cl-web-component-item">product-price</div>
+        <div class="cl-web-component-item">product-recommendations</div>
+        <div class="cl-web-component-item">quantity-selector-component</div>
+        <div class="cl-web-component-item">quick-add-component</div>
+        <div class="cl-web-component-item">quick-add-dialog</div>
+        <div class="cl-web-component-item">quick-order-list-component</div>
+        <div class="cl-web-component-item">results-list</div>
+        <div class="cl-web-component-item">search-page-input-component</div>
+        <div class="cl-web-component-item">show-more-component</div>
+        <div class="cl-web-component-item">slideshow-component</div>
+        <div class="cl-web-component-item">sorting-filter-component</div>
+        <div class="cl-web-component-item">sticky-add-to-cart</div>
+        <div class="cl-web-component-item">swatches-variant-picker-component</div>
+        <div class="cl-web-component-item">text-component</div>
+        <div class="cl-web-component-item">theme-drawer</div>
+        <div class="cl-web-component-item">variant-picker</div>
+        <div class="cl-web-component-item">video-background-component</div>
+        <div class="cl-web-component-item">volume-pricing</div>
+        <div class="cl-web-component-item">zoom-dialog</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Component Library",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}
