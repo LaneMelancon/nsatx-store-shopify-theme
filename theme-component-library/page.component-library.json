@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "component-library": {
-      "type": "component-library",
-      "settings": {}
-    }
-  },
-  "order": ["component-library"]
-}
