@@ -201,6 +201,307 @@
   font-size: var(--font-size--xs);
 }
 
+/* ── Snippet Stylesheets ─────────────────────────────────────────────────────
+   CSS from snippet {% stylesheet %} blocks. Copied here because these snippets
+   are not rendered via {% render %} — their stylesheet blocks would not load.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* pagination-controls.liquid */
+.pagination {
+  --pagination-size: 36px;
+  --pagination-inset: 2px;
+  --pagination-radius: 6;
+
+  display: flex;
+  justify-content: center;
+  padding: var(--padding-xl) var(--padding-sm);
+  margin-top: var(--padding-xl);
+  position: relative;
+  isolation: isolate;
+}
+
+.pagination__list {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.pagination__item {
+  width: var(--pagination-size);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.pagination__link {
+  display: grid;
+  place-items: center;
+  color: var(--color-foreground);
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  position: relative;
+  outline-color: var(--color-foreground);
+  -webkit-tap-highlight-color: transparent;
+  font-size: var(--font-size--md);
+  font-weight: var(--font-weight-normal);
+  border-radius: calc(var(--pagination-radius) * 1px);
+  transition: color var(--hover-transition-duration) var(--hover-transition-timing),
+    opacity var(--hover-transition-duration) var(--hover-transition-timing);
+}
+
+.pagination__link:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 2px;
+}
+
+.pagination__link--current {
+  color: var(--color-background);
+  font-weight: var(--font-weight-medium);
+  cursor: default;
+}
+
+.pagination__link--gap {
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination__link--arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination__link--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination__link svg {
+  width: 0.5rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+.pagination__link--current::before {
+  content: '';
+  position: absolute;
+  inset: var(--pagination-inset);
+  border-radius: calc(var(--pagination-radius) * 1px);
+  background: var(--color-foreground);
+  z-index: -1;
+}
+
+.pagination__link:not(.pagination__link--gap, .pagination__link--disabled, .pagination__link--current):hover::before {
+  content: '';
+  position: absolute;
+  inset: var(--pagination-inset);
+  border-radius: calc(var(--pagination-radius) * 1px);
+  background: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  z-index: -1;
+}
+
+@media screen and (max-width: 749px) {
+  .pagination {
+    --pagination-size: 44px;
+    --pagination-inset: 5px;
+    padding: var(--padding-lg) var(--padding-sm);
+  }
+
+  .pagination__link {
+    font-size: var(--font-size--sm);
+  }
+
+  .pagination__item--mobile-hide {
+    display: none;
+  }
+}
+
+/* divider.liquid */
+.divider {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: var(--divider-justify-content);
+}
+
+.divider__line {
+  border-bottom: var(--divider-border-thickness) solid var(--color-border);
+  border-right: var(--divider-border-thickness) solid var(--color-border);
+  border-radius: calc(var(--style-border-radius-sm) * var(--divider-border-rounded));
+  flex-basis: var(--divider-flex-basis);
+  min-height: var(--divider-flex-basis);
+}
+
+/* cart-bubble.liquid */
+.cart-bubble {
+  --cart-padding: 0.2em;
+
+  position: relative;
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border-width: 0;
+  display: flex;
+  line-height: normal;
+  align-items: center;
+  justify-content: center;
+  color: var(--cart-bubble-text, var(--cart-bubble-text-fallback));
+  padding-inline: var(--cart-padding);
+}
+
+.cart-bubble[data-maintain-ratio] {
+  aspect-ratio: 1;
+}
+
+.cart-bubble[data-maintain-ratio] .cart-bubble__background {
+  border-radius: var(--style-border-radius-50);
+}
+
+.cart-bubble__background {
+  position: absolute;
+  inset: 0;
+  background-color: var(--cart-bubble-background, var(--cart-bubble-background-fallback));
+  border-radius: var(--style-border-radius-lg);
+}
+
+.cart-bubble__text {
+  font-size: var(--font-size--3xs);
+  z-index: var(--layer-flat);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* bento-grid.liquid */
+.bento-box {
+  display: grid;
+  column-gap: var(--bento-gap);
+  row-gap: calc(var(--bento-gap) * 1.5);
+  width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .bento-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bento-box__item { min-width: 0; overflow: hidden; }
+  .bento-box__item:nth-child(3n + 1) { grid-column: span 1; }
+  .bento-box__item:nth-child(3n + 2) { grid-column: span 1; }
+  .bento-box__item:nth-child(3n + 3) { grid-column: span 2; }
+}
+
+@media screen and (min-width: 901px) {
+  .bento-box {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      'A A A B B B B B B C C C'
+      'D D D D D D E E E F F F'
+      'G G G H H H I I I I I I'
+      'J J J J K K K K L L L L';
+  }
+
+  .bento-box__item:nth-child(1) { grid-area: A; }
+  .bento-box__item:nth-child(2) { grid-area: B; }
+  .bento-box__item:nth-child(3) { grid-area: C; }
+  .bento-box__item:nth-child(4) { grid-area: D; }
+  .bento-box__item:nth-child(5) { grid-area: E; }
+  .bento-box__item:nth-child(6) { grid-area: F; }
+
+  .bento-box--items-1 { grid-template-areas: 'A A A A A A A A A A A A'; }
+  .bento-box--items-2 { grid-template-areas: 'A A A A A A B B B B B B'; }
+  .bento-box--items-4 {
+    grid-template-areas:
+      'A A A A B B B B B B B B'
+      'C C C C C C C C D D D D';
+  }
+  .bento-box--items-5 {
+    grid-template-areas:
+      'A A A B B B B B B C C C'
+      'D D D D D D E E E E E E';
+  }
+}
+
+/* overlay.liquid */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--overlay-layer);
+  pointer-events: none;
+  border-radius: var(--overlay-border-radius, 0);
+}
+
+.overlay--solid {
+  background: var(--overlay-color);
+}
+
+.overlay--gradient {
+  background: linear-gradient(var(--overlay-direction), var(--overlay-color), var(--overlay-color--end));
+}
+
+/* accordion-custom-component.liquid (de-nested) */
+accordion-custom details::details-content,
+accordion-custom details .details-content {
+  block-size: 0;
+  overflow-y: clip;
+  opacity: 0;
+  interpolate-size: allow-keywords;
+  transition:
+    content-visibility var(--animation-speed-slow) allow-discrete,
+    padding-block var(--animation-speed-slow) var(--animation-easing),
+    opacity var(--animation-speed-slow) var(--animation-easing),
+    block-size var(--animation-speed-slow) var(--animation-easing);
+}
+
+accordion-custom details:not(:focus-within)::details-content,
+accordion-custom details:not(:focus-within) .details-content {
+  transition: none;
+}
+
+accordion-custom details:not([open])::details-content,
+accordion-custom details:not([open]) .details-content {
+  padding-block: 0;
+}
+
+accordion-custom details[open]::details-content,
+accordion-custom details[open] .details-content {
+  opacity: 1;
+  block-size: auto;
+}
+
+accordion-custom details[open] .details-content:focus-within {
+  overflow-y: visible;
+}
+
+@starting-style {
+  accordion-custom details[open]::details-content,
+  accordion-custom details[open] .details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow-y: clip;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  accordion-custom[data-disable-on-mobile='true'] summary {
+    cursor: auto;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  accordion-custom[data-disable-on-desktop='true'] summary {
+    cursor: auto;
+  }
+}
+
 {% endstylesheet %}
 
 
@@ -677,7 +978,7 @@
         <p class="cl-label">&lt;accordion-custom&gt; with .icon-plus</p>
         <div class="cl-demo">
           <accordion-custom>
-            <details>
+            <details class="details">
               <summary>
                 <span>What ingredients are in this supplement?</span>
                 <span class="svg-wrapper">
@@ -687,13 +988,15 @@
                   </span>
                 </span>
               </summary>
-              <div class="rte">
-                <p>Contains a proprietary blend of adaptogens, vitamins, and minerals formulated for cognitive performance. Full ingredient list on the product label.</p>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Contains a proprietary blend of adaptogens, vitamins, and minerals formulated for cognitive performance. Full ingredient list on the product label.</p>
+                </div>
               </div>
             </details>
           </accordion-custom>
           <accordion-custom>
-            <details>
+            <details class="details">
               <summary>
                 <span>How should I take this product?</span>
                 <span class="svg-wrapper">
@@ -703,13 +1006,15 @@
                   </span>
                 </span>
               </summary>
-              <div class="rte">
-                <p>Take two capsules daily with water, preferably with a meal. Do not exceed the recommended daily dose. Consult your healthcare provider before use.</p>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Take two capsules daily with water, preferably with a meal. Do not exceed the recommended daily dose. Consult your healthcare provider before use.</p>
+                </div>
               </div>
             </details>
           </accordion-custom>
           <accordion-custom>
-            <details open>
+            <details class="details" open>
               <summary>
                 <span>Is this product third-party tested?</span>
                 <span class="svg-wrapper">
@@ -719,8 +1024,10 @@
                   </span>
                 </span>
               </summary>
-              <div class="rte">
-                <p>Yes. All products are independently tested for purity and potency. Certificates of Analysis are available on request. (This item is open by default via the <code>open</code> attribute.)</p>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Yes. All products are independently tested for purity and potency. Certificates of Analysis are available on request. (This item is open by default via the <code>open</code> attribute.)</p>
+                </div>
               </div>
             </details>
           </accordion-custom>
@@ -731,41 +1038,47 @@
         <p class="cl-label">&lt;accordion-custom&gt; with .icon-caret</p>
         <div class="cl-demo">
           <accordion-custom>
-            <details>
+            <details class="details">
               <summary>
                 <span>Shipping &amp; Returns</span>
                 <span class="svg-wrapper">
                   <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                 </span>
               </summary>
-              <div class="rte">
-                <p>Orders ship within 1–2 business days. Standard delivery 5–7 business days. Free shipping on orders over $75. Returns accepted within 30 days of purchase.</p>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Orders ship within 1–2 business days. Standard delivery 5–7 business days. Free shipping on orders over $75. Returns accepted within 30 days of purchase.</p>
+                </div>
               </div>
             </details>
           </accordion-custom>
           <accordion-custom data-disable-on-mobile="true">
-            <details>
+            <details class="details">
               <summary>
                 <span>Disabled on Mobile (data-disable-on-mobile)</span>
                 <span class="svg-wrapper">
                   <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                 </span>
               </summary>
-              <div class="rte">
-                <p>This accordion is always open on mobile because <code>data-disable-on-mobile="true"</code> is set. On desktop it collapses normally.</p>
+              <div class="details-content">
+                <div class="rte">
+                  <p>This accordion is always open on mobile because <code>data-disable-on-mobile="true"</code> is set. On desktop it collapses normally.</p>
+                </div>
               </div>
             </details>
           </accordion-custom>
           <accordion-custom data-close-with-escape="true">
-            <details>
+            <details class="details">
               <summary>
                 <span>Closes with Escape Key</span>
                 <span class="svg-wrapper">
                   <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                 </span>
               </summary>
-              <div class="rte">
-                <p>This accordion respects <kbd>Escape</kbd> to close because <code>data-close-with-escape="true"</code> is set.</p>
+              <div class="details-content">
+                <div class="rte">
+                  <p>This accordion respects <kbd>Escape</kbd> to close because <code>data-close-with-escape="true"</code> is set.</p>
+                </div>
               </div>
             </details>
           </accordion-custom>
@@ -785,17 +1098,15 @@
     <div class="cl-row cl-row--col">
       <div class="cl-item">
         <p class="cl-label">Default — page 1 of 12</p>
-        <nav class="pagination" role="navigation" aria-label="Pagination">
+        <nav class="pagination" aria-label="Pagination">
           <ul class="pagination__list" role="list">
             <li class="pagination__item">
-              <a class="pagination__link pagination__link--arrow pagination__link--disabled" href="#" aria-label="Previous page" aria-disabled="true" tabindex="-1">
-                <span class="svg-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                </span>
-              </a>
+              <span class="pagination__link pagination__link--arrow pagination__link--disabled" aria-label="Previous page" aria-disabled="true">
+                {{- 'icon-chevron-left.svg' | inline_asset_content -}}
+              </span>
             </li>
             <li class="pagination__item">
-              <a class="pagination__link pagination__link--current" href="#" aria-current="page" aria-label="Page 1">1</a>
+              <span class="pagination__link pagination__link--page pagination__link--current" aria-current="page" aria-label="Page 1">1</span>
             </li>
             <li class="pagination__item">
               <a class="pagination__link pagination__link--page" href="#" aria-label="Page 2">2</a>
@@ -803,7 +1114,7 @@
             <li class="pagination__item">
               <a class="pagination__link pagination__link--page" href="#" aria-label="Page 3">3</a>
             </li>
-            <li class="pagination__item">
+            <li class="pagination__item pagination__item--gap">
               <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
             </li>
             <li class="pagination__item">
@@ -811,9 +1122,7 @@
             </li>
             <li class="pagination__item">
               <a class="pagination__link pagination__link--arrow" href="#" aria-label="Next page">
-                <span class="svg-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                </span>
+                {{- 'icon-chevron-right.svg' | inline_asset_content -}}
               </a>
             </li>
           </ul>
@@ -822,31 +1131,29 @@
 
       <div class="cl-item">
         <p class="cl-label">Middle page — page 6 of 12</p>
-        <nav class="pagination" role="navigation" aria-label="Pagination">
+        <nav class="pagination" aria-label="Pagination">
           <ul class="pagination__list" role="list">
             <li class="pagination__item">
               <a class="pagination__link pagination__link--arrow" href="#" aria-label="Previous page">
-                <span class="svg-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-                </span>
+                {{- 'icon-chevron-left.svg' | inline_asset_content -}}
               </a>
             </li>
             <li class="pagination__item">
               <a class="pagination__link pagination__link--page" href="#" aria-label="Page 1">1</a>
             </li>
-            <li class="pagination__item">
+            <li class="pagination__item pagination__item--gap">
               <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
             </li>
             <li class="pagination__item">
               <a class="pagination__link pagination__link--page" href="#" aria-label="Page 5">5</a>
             </li>
             <li class="pagination__item">
-              <a class="pagination__link pagination__link--current" href="#" aria-current="page" aria-label="Page 6">6</a>
+              <span class="pagination__link pagination__link--page pagination__link--current" aria-current="page" aria-label="Page 6">6</span>
             </li>
             <li class="pagination__item">
               <a class="pagination__link pagination__link--page" href="#" aria-label="Page 7">7</a>
             </li>
-            <li class="pagination__item">
+            <li class="pagination__item pagination__item--gap">
               <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
             </li>
             <li class="pagination__item">
@@ -854,9 +1161,7 @@
             </li>
             <li class="pagination__item">
               <a class="pagination__link pagination__link--arrow" href="#" aria-label="Next page">
-                <span class="svg-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-                </span>
+                {{- 'icon-chevron-right.svg' | inline_asset_content -}}
               </a>
             </li>
           </ul>
@@ -946,27 +1251,27 @@
 
     <div class="cl-row cl-row--col">
       <div class="cl-item">
-        <p class="cl-label">1px hairline (default)</p>
-        <div class="divider spacing-style" style="--divider-thickness: 1px; --divider-width: 100%; --divider-rounding: 0;">
-          <div class="divider__line"></div>
+        <p class="cl-label">1px hairline, full width</p>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 1px; --divider-flex-basis: 100%; --divider-border-rounded: 0;">
+          <span class="divider__line"></span>
         </div>
       </div>
       <div class="cl-item">
-        <p class="cl-label">3px thick</p>
-        <div class="divider spacing-style" style="--divider-thickness: 3px; --divider-width: 100%; --divider-rounding: 0;">
-          <div class="divider__line"></div>
+        <p class="cl-label">3px thick, full width</p>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 3px; --divider-flex-basis: 100%; --divider-border-rounded: 0;">
+          <span class="divider__line"></span>
         </div>
       </div>
       <div class="cl-item">
         <p class="cl-label">50% width, centered</p>
-        <div class="divider spacing-style" style="--divider-thickness: 1px; --divider-width: 50%; --divider-rounding: 0; display: flex; justify-content: center;">
-          <div class="divider__line"></div>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 1px; --divider-flex-basis: 50%; --divider-border-rounded: 0;">
+          <span class="divider__line"></span>
         </div>
       </div>
       <div class="cl-item">
-        <p class="cl-label">Pill (4px × 64px, fully rounded)</p>
-        <div class="divider spacing-style" style="--divider-thickness: 4px; --divider-width: 64px; --divider-rounding: 9999px; display: flex; justify-content: center;">
-          <div class="divider__line"></div>
+        <p class="cl-label">Decorative — 64px, 3px, rounded (border-rounded: 1)</p>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 3px; --divider-flex-basis: 64px; --divider-border-rounded: 1;">
+          <span class="divider__line"></span>
         </div>
       </div>
     </div>
@@ -1001,17 +1306,17 @@
         <p class="cl-label">.cart-bubble — cart count indicator</p>
         <div class="cl-demo">
           <div style="display: flex; align-items: center; gap: var(--gap-xl);">
-            <div class="cart-bubble">
-              <div class="cart-bubble__background"></div>
-              <div class="cart-bubble__text">
+            <div class="cart-bubble" data-maintain-ratio style="--cart-bubble-background-fallback: var(--color-foreground); --cart-bubble-text-fallback: var(--color-background);">
+              <span class="cart-bubble__background"></span>
+              <span class="cart-bubble__text">
                 <span class="cart-bubble__text-count">3</span>
-              </div>
+              </span>
             </div>
-            <div class="cart-bubble">
-              <div class="cart-bubble__background"></div>
-              <div class="cart-bubble__text">
+            <div class="cart-bubble" style="--cart-bubble-background-fallback: var(--color-foreground); --cart-bubble-text-fallback: var(--color-background);">
+              <span class="cart-bubble__background"></span>
+              <span class="cart-bubble__text">
                 <span class="cart-bubble__text-count">12</span>
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -1066,7 +1371,7 @@
       <div class="cl-item cl-item--fill">
         <p class="cl-label">.bento-box.bento-box--items-3</p>
         <div class="cl-demo">
-          <div class="bento-box bento-box--items-3" style="height: 220px;">
+          <div class="bento-box bento-box--items-3" style="--bento-gap: var(--gap-lg);">
             <div class="bento-box__item" style="background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); display: flex; align-items: center; justify-content: center;">
               <span class="paragraph">Item 1</span>
             </div>
@@ -1084,7 +1389,7 @@
         <p class="cl-label">.overlay.overlay--gradient on a content block</p>
         <div class="cl-demo" style="padding: 0; overflow: hidden; border-radius: var(--style-border-radius-sm);">
           <div style="position: relative; height: 180px; background-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));">
-            <div class="overlay overlay--gradient"></div>
+            <div class="overlay overlay--gradient" style="--overlay-layer: var(--layer-flat); --overlay-color: rgb(0 0 0 / var(--opacity-25)); --overlay-color--end: rgb(0 0 0 / 0); --overlay-direction: to top;"></div>
             <div style="position: absolute; inset: 0; display: flex; align-items: flex-end; padding: var(--padding-md); z-index: 1;">
               <p class="paragraph" style="color: var(--color-white);">Caption over gradient overlay</p>
             </div>
