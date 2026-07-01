@@ -1,0 +1,1591 @@
+{%- comment -%}
+  sections/component-library.liquid
+  ─────────────────────────────────────────────────────────────────────────────
+  Tinker Theme — Native Component Library
+  All components use Tinker's exact HTML patterns, CSS classes, and web
+  components. No design system overrides. Placeholder copy is dummy content
+  only and does not affect the live theme.
+{%- endcomment -%}
+
+{% stylesheet %}
+
+/* ── Component Library Shell ─────────────────────────────────────────────── */
+
+.cl-page {
+  padding-block: var(--padding-5xl);
+}
+
+.cl-page-header {
+  padding-block-end: var(--padding-4xl);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+  margin-block-end: var(--margin-4xl);
+}
+
+.cl-page-header h1 {
+  margin-block: var(--margin-xs) 0;
+}
+
+.cl-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-sticky);
+  background-color: var(--color-background);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+  padding-block: var(--padding-xs);
+  margin-block-end: var(--margin-4xl);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cl-nav::-webkit-scrollbar { display: none; }
+
+.cl-nav__list {
+  display: flex;
+  gap: var(--gap-2xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.cl-nav__link {
+  display: inline-block;
+  padding: var(--padding-2xs) var(--padding-sm);
+  font-size: var(--font-size--xs);
+  font-family: var(--font-body--family);
+  color: var(--color-foreground);
+  text-decoration: none;
+  border-radius: var(--style-border-radius-xs);
+  transition: background-color var(--animation-values);
+  opacity: var(--opacity-70);
+}
+
+.cl-nav__link:hover {
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8));
+  opacity: 1;
+}
+
+.cl-section {
+  padding-block: var(--padding-4xl);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+}
+
+.cl-section:last-child {
+  border-bottom: none;
+}
+
+.cl-eyebrow {
+  font-size: var(--font-size--2xs);
+  font-family: var(--font-body--family);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-md);
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-40));
+  margin-block-end: var(--margin-2xs);
+}
+
+.cl-section-title {
+  margin-block-end: var(--margin-4xl);
+}
+
+.cl-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-2xl);
+  align-items: flex-start;
+  margin-block-end: var(--margin-4xl);
+}
+
+.cl-row:last-child { margin-block-end: 0; }
+
+.cl-row--center { align-items: center; }
+.cl-row--col { flex-direction: column; }
+
+.cl-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  min-width: 0;
+}
+
+.cl-item--fill {
+  flex: 1;
+  min-width: min(280px, 100%);
+}
+
+.cl-label {
+  font-size: var(--font-size--2xs);
+  font-family: var(--font-body--family);
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.cl-demo {
+  padding: var(--padding-lg);
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+  border-radius: var(--style-border-radius-sm);
+  border: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+}
+
+.cl-demo--lg {
+  padding: var(--padding-4xl);
+}
+
+.cl-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-3xl);
+}
+
+@media (max-width: 749px) {
+  .cl-two-col { grid-template-columns: 1fr; }
+}
+
+.cl-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--gap-xs);
+}
+
+.cl-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-2xs);
+  padding: var(--padding-sm) var(--padding-xs);
+  border-radius: var(--style-border-radius-xs);
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+  text-align: center;
+}
+
+.cl-icon-item .cl-icon-name {
+  font-size: 9px;
+  font-family: var(--font-body--family);
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  word-break: break-all;
+  line-height: 1.3;
+}
+
+.cl-wc-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cl-wc-table th,
+.cl-wc-table td {
+  padding: var(--padding-sm) var(--padding-md);
+  text-align: left;
+  font-size: var(--font-size--sm);
+  font-family: var(--font-body--family);
+  border-bottom: var(--style-border-width) solid rgb(var(--color-border-rgb) / var(--opacity-50));
+}
+
+.cl-wc-table th {
+  font-weight: 600;
+  font-size: var(--font-size--2xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-60));
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5));
+}
+
+.cl-wc-table td:first-child {
+  font-family: monospace;
+  font-size: var(--font-size--xs);
+  color: var(--color-foreground);
+}
+
+.cl-wc-table td:not(:first-child) {
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
+  font-size: var(--font-size--xs);
+}
+
+/* ── Snippet Stylesheets ─────────────────────────────────────────────────────
+   CSS from snippet {% stylesheet %} blocks. Copied here because these snippets
+   are not rendered via {% render %} — their stylesheet blocks would not load.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* pagination-controls.liquid */
+.pagination {
+  --pagination-size: 36px;
+  --pagination-inset: 2px;
+  --pagination-radius: 6;
+
+  display: flex;
+  justify-content: center;
+  padding: var(--padding-xl) var(--padding-sm);
+  margin-top: var(--padding-xl);
+  position: relative;
+  isolation: isolate;
+}
+
+.pagination__list {
+  display: flex;
+  gap: 0;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.pagination__item {
+  width: var(--pagination-size);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.pagination__link {
+  display: grid;
+  place-items: center;
+  color: var(--color-foreground);
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  position: relative;
+  outline-color: var(--color-foreground);
+  -webkit-tap-highlight-color: transparent;
+  font-size: var(--font-size--md);
+  font-weight: var(--font-weight-normal);
+  border-radius: calc(var(--pagination-radius) * 1px);
+  transition: color var(--hover-transition-duration) var(--hover-transition-timing),
+    opacity var(--hover-transition-duration) var(--hover-transition-timing);
+}
+
+.pagination__link:focus-visible {
+  outline: 2px solid var(--color-foreground);
+  outline-offset: 2px;
+}
+
+.pagination__link--current {
+  color: var(--color-background);
+  font-weight: var(--font-weight-medium);
+  cursor: default;
+}
+
+.pagination__link--gap {
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination__link--arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination__link--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination__link svg {
+  width: 0.5rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+}
+
+.pagination__link--current::before {
+  content: '';
+  position: absolute;
+  inset: var(--pagination-inset);
+  border-radius: calc(var(--pagination-radius) * 1px);
+  background: var(--color-foreground);
+  z-index: -1;
+}
+
+.pagination__link:not(.pagination__link--gap, .pagination__link--disabled, .pagination__link--current):hover::before {
+  content: '';
+  position: absolute;
+  inset: var(--pagination-inset);
+  border-radius: calc(var(--pagination-radius) * 1px);
+  background: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  z-index: -1;
+}
+
+@media screen and (max-width: 749px) {
+  .pagination {
+    --pagination-size: 44px;
+    --pagination-inset: 5px;
+    padding: var(--padding-lg) var(--padding-sm);
+  }
+
+  .pagination__link {
+    font-size: var(--font-size--sm);
+  }
+
+  .pagination__item--mobile-hide {
+    display: none;
+  }
+}
+
+/* divider.liquid */
+.divider {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: var(--divider-justify-content);
+}
+
+.divider__line {
+  border-bottom: var(--divider-border-thickness) solid var(--color-border);
+  border-right: var(--divider-border-thickness) solid var(--color-border);
+  border-radius: calc(var(--style-border-radius-sm) * var(--divider-border-rounded));
+  flex-basis: var(--divider-flex-basis);
+  min-height: var(--divider-flex-basis);
+}
+
+/* cart-bubble.liquid */
+.cart-bubble {
+  --cart-padding: 0.2em;
+
+  position: relative;
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border-width: 0;
+  display: flex;
+  line-height: normal;
+  align-items: center;
+  justify-content: center;
+  color: var(--cart-bubble-text, var(--cart-bubble-text-fallback));
+  padding-inline: var(--cart-padding);
+}
+
+.cart-bubble[data-maintain-ratio] {
+  aspect-ratio: 1;
+}
+
+.cart-bubble[data-maintain-ratio] .cart-bubble__background {
+  border-radius: var(--style-border-radius-50);
+}
+
+.cart-bubble__background {
+  position: absolute;
+  inset: 0;
+  background-color: var(--cart-bubble-background, var(--cart-bubble-background-fallback));
+  border-radius: var(--style-border-radius-lg);
+}
+
+.cart-bubble__text {
+  font-size: var(--font-size--3xs);
+  z-index: var(--layer-flat);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* bento-grid.liquid */
+.bento-box {
+  display: grid;
+  column-gap: var(--bento-gap);
+  row-gap: calc(var(--bento-gap) * 1.5);
+  width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .bento-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bento-box__item { min-width: 0; overflow: hidden; }
+  .bento-box__item:nth-child(3n + 1) { grid-column: span 1; }
+  .bento-box__item:nth-child(3n + 2) { grid-column: span 1; }
+  .bento-box__item:nth-child(3n + 3) { grid-column: span 2; }
+}
+
+@media screen and (min-width: 901px) {
+  .bento-box {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+      'A A A B B B B B B C C C'
+      'D D D D D D E E E F F F'
+      'G G G H H H I I I I I I'
+      'J J J J K K K K L L L L';
+  }
+
+  .bento-box__item:nth-child(1) { grid-area: A; }
+  .bento-box__item:nth-child(2) { grid-area: B; }
+  .bento-box__item:nth-child(3) { grid-area: C; }
+  .bento-box__item:nth-child(4) { grid-area: D; }
+  .bento-box__item:nth-child(5) { grid-area: E; }
+  .bento-box__item:nth-child(6) { grid-area: F; }
+
+  .bento-box--items-1 { grid-template-areas: 'A A A A A A A A A A A A'; }
+  .bento-box--items-2 { grid-template-areas: 'A A A A A A B B B B B B'; }
+  .bento-box--items-4 {
+    grid-template-areas:
+      'A A A A B B B B B B B B'
+      'C C C C C C C C D D D D';
+  }
+  .bento-box--items-5 {
+    grid-template-areas:
+      'A A A B B B B B B C C C'
+      'D D D D D D E E E E E E';
+  }
+}
+
+/* overlay.liquid */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--overlay-layer);
+  pointer-events: none;
+  border-radius: var(--overlay-border-radius, 0);
+}
+
+.overlay--solid {
+  background: var(--overlay-color);
+}
+
+.overlay--gradient {
+  background: linear-gradient(var(--overlay-direction), var(--overlay-color), var(--overlay-color--end));
+}
+
+/* accordion-custom-component.liquid (de-nested) */
+accordion-custom details::details-content,
+accordion-custom details .details-content {
+  block-size: 0;
+  overflow-y: clip;
+  opacity: 0;
+  interpolate-size: allow-keywords;
+  transition:
+    content-visibility var(--animation-speed-slow) allow-discrete,
+    padding-block var(--animation-speed-slow) var(--animation-easing),
+    opacity var(--animation-speed-slow) var(--animation-easing),
+    block-size var(--animation-speed-slow) var(--animation-easing);
+}
+
+accordion-custom details:not(:focus-within)::details-content,
+accordion-custom details:not(:focus-within) .details-content {
+  transition: none;
+}
+
+accordion-custom details:not([open])::details-content,
+accordion-custom details:not([open]) .details-content {
+  padding-block: 0;
+}
+
+accordion-custom details[open]::details-content,
+accordion-custom details[open] .details-content {
+  opacity: 1;
+  block-size: auto;
+}
+
+accordion-custom details[open] .details-content:focus-within {
+  overflow-y: visible;
+}
+
+@starting-style {
+  accordion-custom details[open]::details-content,
+  accordion-custom details[open] .details-content {
+    block-size: 0;
+    opacity: 0;
+    overflow-y: clip;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  accordion-custom[data-disable-on-mobile='true'] summary {
+    cursor: auto;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  accordion-custom[data-disable-on-desktop='true'] summary {
+    cursor: auto;
+  }
+}
+
+{% endstylesheet %}
+
+
+{%- comment -%} ── PAGE WRAPPER ─────────────────────────────────────────── {%- endcomment -%}
+<div class="cl-page page-width-normal">
+
+
+  {%- comment -%} ── PAGE HEADER ──────────────────────────────────────────── {%- endcomment -%}
+  <div class="cl-page-header">
+    <p class="cl-eyebrow">Tinker Theme</p>
+    <h1 class="h1">Component Library</h1>
+    <p class="paragraph">Native components, patterns, and tokens from the Tinker theme. All components use default Tinker CSS classes and web component implementations — no overrides.</p>
+  </div>
+
+
+  {%- comment -%} ── STICKY SECTION NAV ───────────────────────────────────── {%- endcomment -%}
+  <nav class="cl-nav" aria-label="Component sections">
+    <ul class="cl-nav__list" role="list">
+      <li><a class="cl-nav__link" href="#cl-typography">Typography</a></li>
+      <li><a class="cl-nav__link" href="#cl-buttons">Buttons</a></li>
+      <li><a class="cl-nav__link" href="#cl-forms">Forms</a></li>
+      <li><a class="cl-nav__link" href="#cl-quantity">Quantity</a></li>
+      <li><a class="cl-nav__link" href="#cl-price">Price</a></li>
+      <li><a class="cl-nav__link" href="#cl-swatches">Swatches</a></li>
+      <li><a class="cl-nav__link" href="#cl-accordion">Accordion</a></li>
+      <li><a class="cl-nav__link" href="#cl-pagination">Pagination</a></li>
+      <li><a class="cl-nav__link" href="#cl-icons">Icons</a></li>
+      <li><a class="cl-nav__link" href="#cl-dividers">Dividers</a></li>
+      <li><a class="cl-nav__link" href="#cl-badges">Badges</a></li>
+      <li><a class="cl-nav__link" href="#cl-media">Media</a></li>
+      <li><a class="cl-nav__link" href="#cl-utilities">Utilities</a></li>
+      <li><a class="cl-nav__link" href="#cl-web-components">Web Components</a></li>
+    </ul>
+  </nav>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 01 — TYPOGRAPHY {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-typography" class="cl-section">
+    <p class="cl-eyebrow">01</p>
+    <h2 class="h2 cl-section-title">Typography</h2>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">Heading scale — h1 through h6 (element tags + utility classes)</p>
+        <div class="cl-demo cl-demo--lg">
+          <div class="text-block">
+            <h1 class="h1">Heading One</h1>
+            <h2 class="h2">Heading Two</h2>
+            <h3 class="h3">Heading Three</h3>
+            <h4 class="h4">Heading Four</h4>
+            <h5 class="h5">Heading Five</h5>
+            <h6 class="h6">Heading Six</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.paragraph</p>
+        <div class="cl-demo">
+          <p class="paragraph">Body copy using the paragraph class. Tinker applies the configured body font family, size, weight, line height, and letter spacing from theme settings via CSS custom properties — <code>--font-paragraph--family</code>, <code>--font-paragraph--size</code>, etc.</p>
+        </div>
+      </div>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.text-block</p>
+        <div class="cl-demo">
+          <div class="text-block">
+            <h3 class="h4">Text Block Title</h3>
+            <p class="paragraph">The text-block class manages margin between adjacent children — removes margin from the first and last child so the container controls spacing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.rte (Rich Text Editor output)</p>
+        <div class="cl-demo">
+          <div class="rte">
+            <h3>RTE Heading</h3>
+            <p>Paragraph with <strong>bold</strong>, <em>italic</em>, and an <a href="#">inline link</a>.</p>
+            <ul>
+              <li>List item one</li>
+              <li>List item two</li>
+              <li>List item three</li>
+            </ul>
+            <blockquote>A blockquote inside rich text content.</blockquote>
+          </div>
+        </div>
+      </div>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">Text alignment utilities</p>
+        <div class="cl-demo">
+          <p class="paragraph text-left" style="margin-block-end: var(--margin-xs);">Left-aligned (.text-left)</p>
+          <p class="paragraph text-center" style="margin-block-end: var(--margin-xs);">Center-aligned (.text-center)</p>
+          <p class="paragraph text-right">Right-aligned (.text-right)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">&lt;jumbo-text&gt; — fills container width</p>
+        <div class="cl-demo cl-demo--lg" style="overflow: hidden;">
+          <jumbo-text>
+            <h2 class="h2">Jumbo</h2>
+          </jumbo-text>
+        </div>
+      </div>
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">Links — default and within headings</p>
+        <div class="cl-demo">
+          <p class="paragraph">Inline <a href="#">paragraph link</a> — inherits from <code>--color</code> and <code>--color-foreground</code>.</p>
+          <h4 class="h5" style="margin-block-start: var(--margin-md);"><a href="#">Heading as a link</a></h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 02 — BUTTONS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-buttons" class="cl-section">
+    <p class="cl-eyebrow">02</p>
+    <h2 class="h2 cl-section-title">Buttons</h2>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.button (primary)</p>
+        <button class="button" type="button">Primary Button</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-secondary</p>
+        <button class="button-secondary" type="button">Secondary Button</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-custom</p>
+        <button class="button-custom" type="button">Custom Button</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-unstyled</p>
+        <button class="button-unstyled" type="button">Unstyled</button>
+      </div>
+    </div>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">Primary — disabled</p>
+        <button class="button" type="button" disabled>Disabled</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">Primary — aria-disabled</p>
+        <button class="button" type="button" aria-disabled="true">Aria Disabled</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">Secondary — disabled</p>
+        <button class="button-secondary" type="button" disabled>Disabled</button>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.button-unstyled--with-icon</p>
+        <button class="button-unstyled button-unstyled--with-icon" type="button">
+          <span class="svg-wrapper">{% render 'icon', icon: 'heart' %}</span>
+          Wishlist
+        </button>
+      </div>
+    </div>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.show-more__button</p>
+        <button class="show-more__button" type="button" aria-expanded="false">
+          <span class="show-more__label show-more__label--more">Show more</span>
+          <span class="show-more__label show-more__label--less" hidden>Show less</span>
+          <span class="svg-wrapper">
+            <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 03 — FORMS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-forms" class="cl-section">
+    <p class="cl-eyebrow">03</p>
+    <h2 class="h2 cl-section-title">Form Components</h2>
+
+    <div class="cl-two-col">
+      <div style="display: flex; flex-direction: column; gap: var(--gap-xl);">
+
+        <div class="cl-item">
+          <p class="cl-label">.field — text input</p>
+          <div class="field">
+            <input class="field__input" type="text" id="cl-text" name="cl-text" placeholder="Placeholder" autocomplete="off">
+            <label class="field__label" for="cl-text">Text Input</label>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <p class="cl-label">.field — email</p>
+          <div class="field">
+            <input class="field__input" type="email" id="cl-email" name="cl-email" placeholder="name@example.com" autocomplete="email">
+            <label class="field__label" for="cl-email">Email Address</label>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <p class="cl-label">.field — textarea</p>
+          <div class="field">
+            <textarea class="field__input" id="cl-textarea" name="cl-textarea" rows="4" placeholder="Enter your message..."></textarea>
+            <label class="field__label" for="cl-textarea">Message</label>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: var(--gap-xl);">
+
+        <div class="cl-item">
+          <p class="cl-label">.checkbox</p>
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs);">
+            <div class="checkbox">
+              <input type="checkbox" class="checkbox__input" id="cl-cb-1" name="cl-cb" value="1">
+              <label class="checkbox__label" for="cl-cb-1">
+                <svg class="icon-checkmark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8 L6 12 L14 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="checkbox__label-text">Unchecked option</span>
+              </label>
+            </div>
+            <div class="checkbox">
+              <input type="checkbox" class="checkbox__input" id="cl-cb-2" name="cl-cb" value="2" checked>
+              <label class="checkbox__label" for="cl-cb-2">
+                <svg class="icon-checkmark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8 L6 12 L14 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="checkbox__label-text">Checked option</span>
+              </label>
+            </div>
+            <div class="checkbox checkbox--disabled">
+              <input type="checkbox" class="checkbox__input" id="cl-cb-3" name="cl-cb" value="3" disabled>
+              <label class="checkbox__label" for="cl-cb-3">
+                <svg class="icon-checkmark" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8 L6 12 L14 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="checkbox__label-text">Disabled option</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="cl-item">
+          <p class="cl-label">input[type="radio"]</p>
+          <div style="display: flex; flex-direction: column; gap: var(--gap-sm);">
+            <label style="display: flex; align-items: center; gap: var(--gap-sm); cursor: pointer; font-family: var(--font-body--family); font-size: var(--font-size--md);">
+              <input type="radio" name="cl-radio" value="a"> Option One
+            </label>
+            <label style="display: flex; align-items: center; gap: var(--gap-sm); cursor: pointer; font-family: var(--font-body--family); font-size: var(--font-size--md);">
+              <input type="radio" name="cl-radio" value="b" checked> Option Two (selected)
+            </label>
+            <label style="display: flex; align-items: center; gap: var(--gap-sm); cursor: pointer; font-family: var(--font-body--family); font-size: var(--font-size--md); opacity: var(--opacity-50);">
+              <input type="radio" name="cl-radio" value="c" disabled> Disabled Option
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 04 — QUANTITY SELECTOR {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-quantity" class="cl-section">
+    <p class="cl-eyebrow">04</p>
+    <h2 class="h2 cl-section-title">Quantity Selector</h2>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">Default &lt;quantity-selector-component&gt;</p>
+        <quantity-selector-component>
+          <div class="quantity-selector">
+            <button class="quantity-minus" ref="minusButton" type="button" aria-label="Decrease quantity">
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <input ref="quantityInput" type="number" min="1" max="99" step="1" value="1" data-cart-quantity="0" aria-label="Quantity" id="cl-qty-1" name="quantity">
+            <button class="quantity-plus" ref="plusButton" type="button" aria-label="Increase quantity">
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+          </div>
+        </quantity-selector-component>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">At minimum — minus disabled</p>
+        <quantity-selector-component>
+          <div class="quantity-selector">
+            <button class="quantity-minus" ref="minusButton" type="button" aria-label="Decrease quantity" disabled>
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+            <input ref="quantityInput" type="number" min="1" max="99" step="1" value="1" data-cart-quantity="0" aria-label="Quantity" id="cl-qty-2" name="quantity">
+            <button class="quantity-plus" ref="plusButton" type="button" aria-label="Increase quantity">
+              <span class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </button>
+          </div>
+        </quantity-selector-component>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 05 — PRICE DISPLAY {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-price" class="cl-section">
+    <p class="cl-eyebrow">05</p>
+    <h2 class="h2 cl-section-title">Price Display</h2>
+
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">Regular price (.price__regular)</p>
+        <div class="cl-demo">
+          <div class="price__regular">
+            <span class="price-item__group">
+              <span class="price">$49.99</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">Sale price + compare-at</p>
+        <div class="cl-demo">
+          <div class="price__sale">
+            <span class="price-item__group">
+              <span class="price price-item--sale">$34.99</span>
+              <s class="compare-at-price">$49.99</s>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">With unit price (.unit-price)</p>
+        <div class="cl-demo">
+          <div class="price__regular">
+            <span class="price-item__group">
+              <span class="price">$24.99</span>
+            </span>
+            <div class="unit-price">$0.83 / capsule</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">Tax note (.tax-note)</p>
+        <div class="cl-demo">
+          <div class="price__regular">
+            <span class="price-item__group">
+              <span class="price">$59.99</span>
+            </span>
+            <div class="tax-note">Tax included. Shipping calculated at checkout.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 06 — SWATCHES & VARIANT PICKERS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-swatches" class="cl-section">
+    <p class="cl-eyebrow">06</p>
+    <h2 class="h2 cl-section-title">Swatches &amp; Variant Pickers</h2>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.swatch — color swatches</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <span class="swatch" style="--swatch-background: #E63946; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #457B9D; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #2D6A4F; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #F4A261; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #1D1D1D; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch" style="--swatch-background: #F5F5F5; --swatch-focal-point: 50% 50%;"></span>
+            <span class="swatch swatch--unavailable" style="--swatch-background: #B0B0B0; --swatch-focal-point: 50% 50%;"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.swatch--pill — size/text options</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <span class="swatch swatch--pill">XS</span>
+            <span class="swatch swatch--pill">SM</span>
+            <span class="swatch swatch--pill">MD</span>
+            <span class="swatch swatch--pill">LG</span>
+            <span class="swatch swatch--pill">XL</span>
+            <span class="swatch swatch--pill swatch--unavailable">2XL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.swatch--filter — filter panel swatches</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <span class="swatch swatch--filter" style="--swatch-background: #E63946;"></span>
+            <span class="swatch swatch--filter" style="--swatch-background: #457B9D;"></span>
+            <span class="swatch swatch--filter" style="--swatch-background: #2D6A4F;"></span>
+            <span class="swatch swatch--filter" style="--swatch-background: #1D1D1D;"></span>
+            <span class="swatch swatch--filter swatch--unavailable" style="--swatch-background: #B0B0B0;"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.variant-option__button-label — variant buttons</p>
+        <div class="cl-demo">
+          <fieldset class="variant-option variant-option--buttons" style="border: none; padding: 0; margin: 0;">
+            <legend class="visually-hidden">Size</legend>
+            <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs);">
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="xs">
+                <span class="variant-option__button-label__text">XS</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="sm">
+                <span class="variant-option__button-label__text">SM</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="md" checked>
+                <span class="variant-option__button-label__text">MD</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="lg">
+                <span class="variant-option__button-label__text">LG</span>
+              </label>
+              <label class="variant-option__button-label">
+                <input type="radio" name="cl-variant" value="xl" data-option-available="false">
+                <span class="variant-option__button-label__text">XL</span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 07 — ACCORDION {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-accordion" class="cl-section">
+    <p class="cl-eyebrow">07</p>
+    <h2 class="h2 cl-section-title">Accordion</h2>
+
+    <div class="cl-two-col">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">&lt;accordion-custom&gt; with .icon-plus</p>
+        <div class="cl-demo">
+          <accordion-custom>
+            <details class="details">
+              <summary>
+                <span>What ingredients are in this supplement?</span>
+                <span class="svg-wrapper">
+                  <span class="icon-plus">
+                    <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+                  </span>
+                </span>
+              </summary>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Contains a proprietary blend of adaptogens, vitamins, and minerals formulated for cognitive performance. Full ingredient list on the product label.</p>
+                </div>
+              </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom>
+            <details class="details">
+              <summary>
+                <span>How should I take this product?</span>
+                <span class="svg-wrapper">
+                  <span class="icon-plus">
+                    <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+                  </span>
+                </span>
+              </summary>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Take two capsules daily with water, preferably with a meal. Do not exceed the recommended daily dose. Consult your healthcare provider before use.</p>
+                </div>
+              </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom>
+            <details class="details" open>
+              <summary>
+                <span>Is this product third-party tested?</span>
+                <span class="svg-wrapper">
+                  <span class="icon-plus">
+                    <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+                  </span>
+                </span>
+              </summary>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Yes. All products are independently tested for purity and potency. Certificates of Analysis are available on request. (This item is open by default via the <code>open</code> attribute.)</p>
+                </div>
+              </div>
+            </details>
+          </accordion-custom>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">&lt;accordion-custom&gt; with .icon-caret</p>
+        <div class="cl-demo">
+          <accordion-custom>
+            <details class="details">
+              <summary>
+                <span>Shipping &amp; Returns</span>
+                <span class="svg-wrapper">
+                  <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="details-content">
+                <div class="rte">
+                  <p>Orders ship within 1–2 business days. Standard delivery 5–7 business days. Free shipping on orders over $75. Returns accepted within 30 days of purchase.</p>
+                </div>
+              </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom data-disable-on-mobile="true">
+            <details class="details">
+              <summary>
+                <span>Disabled on Mobile (data-disable-on-mobile)</span>
+                <span class="svg-wrapper">
+                  <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="details-content">
+                <div class="rte">
+                  <p>This accordion is always open on mobile because <code>data-disable-on-mobile="true"</code> is set. On desktop it collapses normally.</p>
+                </div>
+              </div>
+            </details>
+          </accordion-custom>
+          <accordion-custom data-close-with-escape="true">
+            <details class="details">
+              <summary>
+                <span>Closes with Escape Key</span>
+                <span class="svg-wrapper">
+                  <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </summary>
+              <div class="details-content">
+                <div class="rte">
+                  <p>This accordion respects <kbd>Escape</kbd> to close because <code>data-close-with-escape="true"</code> is set.</p>
+                </div>
+              </div>
+            </details>
+          </accordion-custom>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 08 — PAGINATION {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-pagination" class="cl-section">
+    <p class="cl-eyebrow">08</p>
+    <h2 class="h2 cl-section-title">Pagination</h2>
+
+    <div class="cl-row cl-row--col">
+      <div class="cl-item">
+        <p class="cl-label">Default — page 1 of 12</p>
+        <nav class="pagination" aria-label="Pagination">
+          <ul class="pagination__list" role="list">
+            <li class="pagination__item">
+              <span class="pagination__link pagination__link--arrow pagination__link--disabled" aria-label="Previous page" aria-disabled="true">
+                {{- 'icon-chevron-left.svg' | inline_asset_content -}}
+              </span>
+            </li>
+            <li class="pagination__item">
+              <span class="pagination__link pagination__link--page pagination__link--current" aria-current="page" aria-label="Page 1">1</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 2">2</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 3">3</a>
+            </li>
+            <li class="pagination__item pagination__item--gap">
+              <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 12">12</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--arrow" href="#" aria-label="Next page">
+                {{- 'icon-chevron-right.svg' | inline_asset_content -}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="cl-item">
+        <p class="cl-label">Middle page — page 6 of 12</p>
+        <nav class="pagination" aria-label="Pagination">
+          <ul class="pagination__list" role="list">
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--arrow" href="#" aria-label="Previous page">
+                {{- 'icon-chevron-left.svg' | inline_asset_content -}}
+              </a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 1">1</a>
+            </li>
+            <li class="pagination__item pagination__item--gap">
+              <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 5">5</a>
+            </li>
+            <li class="pagination__item">
+              <span class="pagination__link pagination__link--page pagination__link--current" aria-current="page" aria-label="Page 6">6</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 7">7</a>
+            </li>
+            <li class="pagination__item pagination__item--gap">
+              <span class="pagination__link pagination__link--gap" aria-hidden="true">&hellip;</span>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--page" href="#" aria-label="Page 12">12</a>
+            </li>
+            <li class="pagination__item">
+              <a class="pagination__link pagination__link--arrow" href="#" aria-label="Next page">
+                {{- 'icon-chevron-right.svg' | inline_asset_content -}}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 09 — ICONS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-icons" class="cl-section">
+    <p class="cl-eyebrow">09</p>
+    <h2 class="h2 cl-section-title">Icons</h2>
+    <p class="paragraph" style="margin-block-end: var(--margin-4xl);">Rendered via <code>{%- raw -%}{% render 'icon', icon: 'name' %}{%- endraw -%}</code> from <code>snippets/icon.liquid</code>. 70 icons available.</p>
+
+    <div class="cl-icon-grid">
+      {%- assign cl_icons = '3d-model,apple,arrow,banana,bluesky,bottle,box,caret,carrot,chat_bubble,check_box,clipboard,dairy,dairy_free,discord,double-sided-caret,dryer,error,eye,facebook,fire,gluten_free,heart,instagram,iron,leaf,leather,lightning_bolt,linkedin,lipstick,lock,map_pin,mastodon,next,nut_free,pants,paw_print,pepper,perfume,pinterest,plane,plant,previous,price_tag,question_mark,recycle,reddit,return,ruler,serving_dish,shirt,shoe,silhouette,snapchat,snowflake,spotify,star,stopwatch,telegram,threads,tiktok,truck,tumblr,twitch,twitter,vimeo,washing,whatsapp,x,youtube' | split: ',' -%}
+      {%- for cl_icon in cl_icons -%}
+        <div class="cl-icon-item">
+          <span class="svg-wrapper">{% render 'icon', icon: cl_icon %}</span>
+          <span class="cl-icon-name">{{ cl_icon }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <h3 class="h5" style="margin-block: var(--margin-4xl) var(--margin-lg);">SVG Wrapper size variants</h3>
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.svg-wrapper--smaller (--icon-size-2xs)</p>
+        <span class="svg-wrapper svg-wrapper--smaller">{% render 'icon', icon: 'star' %}</span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.svg-wrapper--small (--icon-size-xs)</p>
+        <span class="svg-wrapper svg-wrapper--small">{% render 'icon', icon: 'star' %}</span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.svg-wrapper (--icon-size-sm, default)</p>
+        <span class="svg-wrapper">{% render 'icon', icon: 'star' %}</span>
+      </div>
+    </div>
+
+    <h3 class="h5" style="margin-block: var(--margin-4xl) var(--margin-lg);">System icon classes</h3>
+    <div class="cl-row cl-row--center">
+      <div class="cl-item">
+        <p class="cl-label">.icon-success</p>
+        <svg class="icon-success" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 9"/></svg>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-error</p>
+        <svg class="icon-error" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-caret (down)</p>
+        <span class="svg-wrapper">
+          <svg class="icon-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-caret--forward</p>
+        <span class="svg-wrapper">
+          <svg class="icon-caret icon-caret--forward" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.icon-plus (closed)</p>
+        <span class="icon-plus">
+          <svg class="horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <svg class="vertical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/></svg>
+        </span>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">.flip-x on .svg-wrapper</p>
+        <span class="svg-wrapper flip-x">{% render 'icon', icon: 'arrow' %}</span>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 10 — DIVIDERS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-dividers" class="cl-section">
+    <p class="cl-eyebrow">10</p>
+    <h2 class="h2 cl-section-title">Dividers</h2>
+
+    <div class="cl-row cl-row--col">
+      <div class="cl-item">
+        <p class="cl-label">1px hairline, full width</p>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 1px; --divider-flex-basis: 100%; --divider-border-rounded: 0;">
+          <span class="divider__line"></span>
+        </div>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">3px thick, full width</p>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 3px; --divider-flex-basis: 100%; --divider-border-rounded: 0;">
+          <span class="divider__line"></span>
+        </div>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">50% width, centered</p>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 1px; --divider-flex-basis: 50%; --divider-border-rounded: 0;">
+          <span class="divider__line"></span>
+        </div>
+      </div>
+      <div class="cl-item">
+        <p class="cl-label">Decorative — 64px, 3px, rounded (border-rounded: 1)</p>
+        <div class="divider spacing-style" style="--divider-justify-content: center; --divider-border-thickness: 3px; --divider-flex-basis: 64px; --divider-border-rounded: 1;">
+          <span class="divider__line"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 11 — BADGES & PILLS {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-badges" class="cl-section">
+    <p class="cl-eyebrow">11</p>
+    <h2 class="h2 cl-section-title">Badges &amp; Pills</h2>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.bubble — count badge</p>
+        <div class="cl-demo">
+          <div style="display: flex; align-items: center; gap: var(--gap-xl);">
+            <div style="position: relative; display: inline-block;">
+              <span class="svg-wrapper">{% render 'icon', icon: 'heart' %}</span>
+              <span class="bubble" style="position: absolute; top: -6px; right: -6px; min-width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; padding-inline: 4px;">3</span>
+            </div>
+            <div style="position: relative; display: inline-block;">
+              <span class="svg-wrapper">{% render 'icon', icon: 'box' %}</span>
+              <span class="bubble" style="position: absolute; top: -6px; right: -6px; min-width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; padding-inline: 4px;">99</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.cart-bubble — cart count indicator</p>
+        <div class="cl-demo">
+          <div style="display: flex; align-items: center; gap: var(--gap-xl);">
+            <div class="cart-bubble" data-maintain-ratio style="--cart-bubble-background-fallback: var(--color-foreground); --cart-bubble-text-fallback: var(--color-background);">
+              <span class="cart-bubble__background"></span>
+              <span class="cart-bubble__text">
+                <span class="cart-bubble__text-count">3</span>
+              </span>
+            </div>
+            <div class="cart-bubble" style="--cart-bubble-background-fallback: var(--color-foreground); --cart-bubble-text-fallback: var(--color-background);">
+              <span class="cart-bubble__background"></span>
+              <span class="cart-bubble__text">
+                <span class="cart-bubble__text-count">12</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.pills__pill — filter/facet pills</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs);">
+            <button class="pills__pill" type="button">All Products</button>
+            <button class="pills__pill" type="button">Vitamins</button>
+            <button class="pills__pill" type="button">Minerals</button>
+            <button class="pills__pill" type="button">Adaptogens</button>
+            <button class="pills__pill" type="button">Nootropics</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.pills__pill--swatch — pills with color</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-wrap: wrap; gap: var(--gap-xs); align-items: center;">
+            <button class="pills__pill pills__pill--swatch" type="button">
+              <span class="swatch swatch--unscaled" style="--swatch-background: #E63946;"></span>
+              Red
+            </button>
+            <button class="pills__pill pills__pill--swatch" type="button">
+              <span class="swatch swatch--unscaled" style="--swatch-background: #457B9D;"></span>
+              Blue
+            </button>
+            <button class="pills__pill pills__pill--swatch" type="button">
+              <span class="swatch swatch--unscaled" style="--swatch-background: #2D6A4F;"></span>
+              Green
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 12 — MEDIA {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-media" class="cl-section">
+    <p class="cl-eyebrow">12</p>
+    <h2 class="h2 cl-section-title">Media &amp; Layout</h2>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.bento-box.bento-box--items-3</p>
+        <div class="cl-demo">
+          <div class="bento-box bento-box--items-3" style="--bento-gap: var(--gap-lg);">
+            <div class="bento-box__item" style="background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); display: flex; align-items: center; justify-content: center;">
+              <span class="paragraph">Item 1</span>
+            </div>
+            <div class="bento-box__item" style="background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5)); border-radius: var(--style-border-radius-xs); display: flex; align-items: center; justify-content: center;">
+              <span class="paragraph">Item 2</span>
+            </div>
+            <div class="bento-box__item" style="background-color: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); display: flex; align-items: center; justify-content: center;">
+              <span class="paragraph">Item 3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.overlay.overlay--gradient on a content block</p>
+        <div class="cl-demo" style="padding: 0; overflow: hidden; border-radius: var(--style-border-radius-sm);">
+          <div style="position: relative; height: 180px; background-color: rgb(var(--color-foreground-rgb) / var(--opacity-15));">
+            <div class="overlay overlay--gradient" style="--overlay-layer: var(--layer-flat); --overlay-color: rgb(0 0 0 / var(--opacity-25)); --overlay-color--end: rgb(0 0 0 / 0); --overlay-direction: to top;"></div>
+            <div style="position: absolute; inset: 0; display: flex; align-items: flex-end; padding: var(--padding-md); z-index: 1;">
+              <p class="paragraph" style="color: var(--color-white);">Caption over gradient overlay</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cl-row">
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.section height modifiers</p>
+        <div class="cl-demo">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.section--height-small → 15rem / 40svh / 50svh</code>
+            <code>.section--height-medium → 25rem / 55svh / 65svh</code>
+            <code>.section--height-large → 35rem / 70svh / 80svh</code>
+            <code>.section--height-full-screen → 100svh</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-item cl-item--fill">
+        <p class="cl-label">.layout-panel-flex variants</p>
+        <div class="cl-demo">
+          <div class="layout-panel-flex layout-panel-flex--row" style="gap: var(--gap-md); --gap: var(--gap-md);">
+            <div style="padding: var(--padding-sm); background: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); flex: 1; text-align: center; font-size: var(--font-size--sm); font-family: var(--font-body--family);">Block A</div>
+            <div style="padding: var(--padding-sm); background: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); flex: 1; text-align: center; font-size: var(--font-size--sm); font-family: var(--font-body--family);">Block B</div>
+            <div style="padding: var(--padding-sm); background: rgb(var(--color-foreground-rgb) / var(--opacity-8)); border-radius: var(--style-border-radius-xs); flex: 1; text-align: center; font-size: var(--font-size--sm); font-family: var(--font-body--family);">Block C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 13 — UTILITY CLASSES {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-utilities" class="cl-section">
+    <p class="cl-eyebrow">13</p>
+    <h2 class="h2 cl-section-title">Utility Classes</h2>
+
+    <div class="cl-two-col">
+      <div>
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Display &amp; Visibility</h3>
+        <div class="cl-demo" style="margin-block-end: var(--margin-4xl);">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.hidden — display: none !important</code>
+            <code>.hidden--mobile — hidden at max-width 749px</code>
+            <code>.hidden--desktop — hidden at min-width 750px</code>
+            <code>.visually-hidden — visible to screen readers only</code>
+            <code>.is-visually-hidden-mobile — screen-reader only on mobile</code>
+            <code>.hide-when-empty — hidden when :empty</code>
+            <code>.contents — display: contents</code>
+            <code>.relative — position: relative</code>
+          </div>
+        </div>
+
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Background Images</h3>
+        <div class="cl-demo">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.background-image-container — absolute fill, object-fit: cover</code>
+            <code>.background-image-fit — object-fit: contain</code>
+            <code>.container-background-image — bg-size: cover, no-repeat</code>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Transition Helpers</h3>
+        <div class="cl-demo" style="margin-block-end: var(--margin-4xl);">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.transition-background-color — speed-medium ease-in-out</code>
+            <code>.transition-transform — speed-medium timing-bounce</code>
+            <code>.transition-border-color — speed-medium timing-hover</code>
+          </div>
+        </div>
+
+        <h3 class="h5" style="margin-block-end: var(--margin-md);">Spacing System Classes</h3>
+        <div class="cl-demo">
+          <div style="display: flex; flex-direction: column; gap: var(--gap-xs); font-size: var(--font-size--sm); font-family: var(--font-body--family);">
+            <code>.spacing-style — reads --padding-block-* and --margin-block-* vars</code>
+            <code>.inherit-spacing — inherits spacing from parent .spacing-style</code>
+            <code>.gap-style — sets gap from --gap var (scales with --gap-scale)</code>
+            <code>.size-style — reads --size-style-width / --size-style-height vars</code>
+            <code>.border-style — reads --border-width / --border-color / --border-radius</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%} 14 — WEB COMPONENTS INVENTORY {%- endcomment -%}
+  {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
+  <section id="cl-web-components" class="cl-section">
+    <p class="cl-eyebrow">14</p>
+    <h2 class="h2 cl-section-title">Web Components</h2>
+    <p class="paragraph" style="margin-block-end: var(--margin-4xl);">All custom elements registered via <code>customElements.define()</code> in the Tinker theme. Each component follows the Shopify Dawn pattern — vanilla JS, no framework.</p>
+
+    <table class="cl-wc-table">
+      <thead>
+        <tr>
+          <th>Element</th>
+          <th>Source File</th>
+          <th>Key Attributes / Refs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>&lt;product-card&gt;</td>
+          <td>product-card.js</td>
+          <td>data-product-transition, data-featured-media-url, data-no-navigation — ref: productCardLink (required), slideshow, quickAdd, cardGallery</td>
+        </tr>
+        <tr>
+          <td>&lt;quick-add-component&gt;</td>
+          <td>quick-add.js</td>
+          <td>data-product-title, data-product-options-count — opens &lt;quick-add-dialog&gt; modal</td>
+        </tr>
+        <tr>
+          <td>&lt;quick-add-dialog&gt;</td>
+          <td>quick-add.js</td>
+          <td>Modal dialog — child: #quick-add-modal-content[data-product-grid-content]</td>
+        </tr>
+        <tr>
+          <td>&lt;slideshow-component&gt;</td>
+          <td>slideshow.js</td>
+          <td>autoplay="{s}", infinite, initial-slide, mobile-disabled, auto-hide-controls — ref: scroller (req), slideshowContainer (req), slides, previous, next, dots, thumbnails</td>
+        </tr>
+        <tr>
+          <td>&lt;slideshow-slide&gt;</td>
+          <td>slideshow.js</td>
+          <td>ref="slides", slide-id, aria-hidden, variant-image — child of &lt;slideshow-component&gt;</td>
+        </tr>
+        <tr>
+          <td>&lt;accordion-custom&gt;</td>
+          <td>accordion-custom.js</td>
+          <td>data-disable-on-mobile, data-disable-on-desktop, data-close-with-escape, open-by-default-on-mobile, open-by-default-on-desktop — requires child &lt;details&gt;&lt;summary&gt;</td>
+        </tr>
+        <tr>
+          <td>&lt;marquee-component&gt;</td>
+          <td>marquee.js</td>
+          <td>data-speed-factor (required) — ref: wrapper (req), content (req), marqueeItems (multiple, req)</td>
+        </tr>
+        <tr>
+          <td>&lt;jumbo-text&gt;</td>
+          <td>jumbo-text.js</td>
+          <td>data-text-effect, data-animation-repeat, data-cap-text — scales font-size to fill container width</td>
+        </tr>
+        <tr>
+          <td>&lt;quantity-selector-component&gt;</td>
+          <td>component-quantity-selector.js</td>
+          <td>ref: quantityInput (req), minusButton (req), plusButton (req) — emits QuantitySelectorUpdateEvent</td>
+        </tr>
+        <tr>
+          <td>&lt;product-price&gt;</td>
+          <td>(inline web component)</td>
+          <td>Manages .price__regular / .price__sale / .price__hidden visibility — children: .tax-note, .volume-pricing-note</td>
+        </tr>
+        <tr>
+          <td>&lt;media-gallery&gt;</td>
+          <td>(inline web component)</td>
+          <td>Gallery grid controller — children: .media-gallery__grid, .product-media-container — uses --gallery-aspect-ratio, --image-gap</td>
+        </tr>
+        <tr>
+          <td>&lt;deferred-media&gt;</td>
+          <td>(inline web component)</td>
+          <td>Lazy-loads video/iframe on interaction — states: [data-media-loaded] — children: .deferred-media__poster-button, template</td>
+        </tr>
+        <tr>
+          <td>&lt;product-model&gt;</td>
+          <td>(inline web component)</td>
+          <td>Wraps Shopify model-viewer — children: model-viewer, .deferred-media__poster-button</td>
+        </tr>
+        <tr>
+          <td>&lt;fly-to-cart&gt;</td>
+          <td>(inline web component)</td>
+          <td>Animated product-to-cart fly animation — modifiers: --main, --quick, --sticky — uses --offset-y, --width, --start-x/y, --travel-x/y</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+
+</div>
+
+{% schema %}
+{
+  "name": "Component Library",
+  "class": "component-library",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Component Library"
+    }
+  ]
+}
+{% endschema %}
