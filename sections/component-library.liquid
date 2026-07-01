@@ -502,6 +502,62 @@ accordion-custom details[open] .details-content:focus-within {
   }
 }
 
+/* ── marquee-component (from blocks/_marquee.liquid) ─────────────────────── */
+marquee-component {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-background);
+}
+
+.marquee__wrapper {
+  display: flex;
+  gap: var(--marquee-gap);
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.marquee__content {
+  min-width: max-content;
+  display: flex;
+  gap: var(--marquee-gap);
+}
+
+.marquee__content :is(p, h1, h2, h3, h4, h5, h6) {
+  white-space: nowrap;
+}
+
+.marquee__repeated-items {
+  min-width: max-content;
+  display: flex;
+  gap: var(--marquee-gap);
+  align-items: center;
+  justify-content: center;
+}
+
+.marquee__repeated-items > * {
+  align-content: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  marquee-component:not([data-disabled]) .marquee__wrapper {
+    animation: marquee-motion var(--marquee-speed) linear infinite var(--marquee-direction);
+  }
+}
+
+@keyframes marquee-motion {
+  to {
+    transform: translate3d(calc(-50% - (var(--marquee-gap) / 2)), 0, 0);
+  }
+}
+
+/* ── cl-product-grid ─────────────────────────────────────────────────────── */
+.cl-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--gap-lg);
+}
+
 {% endstylesheet %}
 
 
@@ -1484,94 +1540,177 @@ accordion-custom details[open] .details-content:focus-within {
 
 
   {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
-  {%- comment -%} 14 — WEB COMPONENTS INVENTORY {%- endcomment -%}
+  {%- comment -%} 14 — WEB COMPONENTS {%- endcomment -%}
   {%- comment -%} ─────────────────────────────────────────────────────────── {%- endcomment -%}
   <section id="cl-web-components" class="cl-section">
     <p class="cl-eyebrow">14</p>
     <h2 class="h2 cl-section-title">Web Components</h2>
-    <p class="paragraph" style="margin-block-end: var(--margin-4xl);">All custom elements registered via <code>customElements.define()</code> in the Tinker theme. Each component follows the Shopify Dawn pattern — vanilla JS, no framework.</p>
+    <p class="paragraph" style="margin-block-end: var(--margin-4xl);">Tinker's custom elements rendered with live store data from the <strong>supplements</strong> collection. Each component uses the same blocks system and Liquid patterns as the theme's production sections.</p>
 
-    <table class="cl-wc-table">
-      <thead>
-        <tr>
-          <th>Element</th>
-          <th>Source File</th>
-          <th>Key Attributes / Refs</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>&lt;product-card&gt;</td>
-          <td>product-card.js</td>
-          <td>data-product-transition, data-featured-media-url, data-no-navigation — ref: productCardLink (required), slideshow, quickAdd, cardGallery</td>
-        </tr>
-        <tr>
-          <td>&lt;quick-add-component&gt;</td>
-          <td>quick-add.js</td>
-          <td>data-product-title, data-product-options-count — opens &lt;quick-add-dialog&gt; modal</td>
-        </tr>
-        <tr>
-          <td>&lt;quick-add-dialog&gt;</td>
-          <td>quick-add.js</td>
-          <td>Modal dialog — child: #quick-add-modal-content[data-product-grid-content]</td>
-        </tr>
-        <tr>
-          <td>&lt;slideshow-component&gt;</td>
-          <td>slideshow.js</td>
-          <td>autoplay="{s}", infinite, initial-slide, mobile-disabled, auto-hide-controls — ref: scroller (req), slideshowContainer (req), slides, previous, next, dots, thumbnails</td>
-        </tr>
-        <tr>
-          <td>&lt;slideshow-slide&gt;</td>
-          <td>slideshow.js</td>
-          <td>ref="slides", slide-id, aria-hidden, variant-image — child of &lt;slideshow-component&gt;</td>
-        </tr>
-        <tr>
-          <td>&lt;accordion-custom&gt;</td>
-          <td>accordion-custom.js</td>
-          <td>data-disable-on-mobile, data-disable-on-desktop, data-close-with-escape, open-by-default-on-mobile, open-by-default-on-desktop — requires child &lt;details&gt;&lt;summary&gt;</td>
-        </tr>
-        <tr>
-          <td>&lt;marquee-component&gt;</td>
-          <td>marquee.js</td>
-          <td>data-speed-factor (required) — ref: wrapper (req), content (req), marqueeItems (multiple, req)</td>
-        </tr>
-        <tr>
-          <td>&lt;jumbo-text&gt;</td>
-          <td>jumbo-text.js</td>
-          <td>data-text-effect, data-animation-repeat, data-cap-text — scales font-size to fill container width</td>
-        </tr>
-        <tr>
-          <td>&lt;quantity-selector-component&gt;</td>
-          <td>component-quantity-selector.js</td>
-          <td>ref: quantityInput (req), minusButton (req), plusButton (req) — emits QuantitySelectorUpdateEvent</td>
-        </tr>
-        <tr>
-          <td>&lt;product-price&gt;</td>
-          <td>(inline web component)</td>
-          <td>Manages .price__regular / .price__sale / .price__hidden visibility — children: .tax-note, .volume-pricing-note</td>
-        </tr>
-        <tr>
-          <td>&lt;media-gallery&gt;</td>
-          <td>(inline web component)</td>
-          <td>Gallery grid controller — children: .media-gallery__grid, .product-media-container — uses --gallery-aspect-ratio, --image-gap</td>
-        </tr>
-        <tr>
-          <td>&lt;deferred-media&gt;</td>
-          <td>(inline web component)</td>
-          <td>Lazy-loads video/iframe on interaction — states: [data-media-loaded] — children: .deferred-media__poster-button, template</td>
-        </tr>
-        <tr>
-          <td>&lt;product-model&gt;</td>
-          <td>(inline web component)</td>
-          <td>Wraps Shopify model-viewer — children: model-viewer, .deferred-media__poster-button</td>
-        </tr>
-        <tr>
-          <td>&lt;fly-to-cart&gt;</td>
-          <td>(inline web component)</td>
-          <td>Animated product-to-cart fly animation — modifiers: --main, --quick, --sticky — uses --offset-y, --width, --start-x/y, --travel-x/y</td>
-        </tr>
-      </tbody>
-    </table>
+    {%- comment -%} 14a — Product Card {%- endcomment -%}
+    <div class="cl-row cl-row--col">
+      <div class="cl-item" style="width: 100%;">
+        <span class="cl-label">&lt;product-card&gt; — supplements collection (up to 4 products)</span>
+        <div class="cl-demo cl-demo--lg">
+          {%- assign cl_supplements = collections['supplements'] -%}
+          {%- if cl_supplements != blank and cl_supplements.products_count > 0 -%}
+            <div class="cl-product-grid">
+              {%- for cl_product in cl_supplements.products limit: 4 -%}
+                {%- content_for 'block', type: '_product-card', id: 'cl-product-card', closest.product: cl_product, product_view_context: 'collection' -%}
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <p class="paragraph" style="opacity: 0.5;">No products found in the <code>supplements</code> collection. Add products in the Shopify admin to see product cards rendered here.</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} 14b — Collection Card {%- endcomment -%}
+    <div class="cl-row cl-row--col" style="margin-block-start: var(--margin-4xl);">
+      <div class="cl-item">
+        <span class="cl-label">&lt;collection-card&gt; — supplements collection</span>
+        <div class="cl-demo cl-demo--lg" style="max-width: 320px;">
+          {%- if cl_supplements != blank -%}
+            {%- content_for 'block', type: '_collection-card', id: 'cl-collection-card', closest.collection: cl_supplements -%}
+          {%- else -%}
+            <p class="paragraph" style="opacity: 0.5;">Collection <code>supplements</code> not found.</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} 14c — Marquee {%- endcomment -%}
+    <div class="cl-row cl-row--col" style="margin-block-start: var(--margin-4xl);">
+      <div class="cl-item" style="width: 100%;">
+        <span class="cl-label">&lt;marquee-component&gt; — continuous scroll, speed driven by marquee.js</span>
+        <div class="cl-demo" style="padding-inline: 0; overflow: hidden;">
+          <script src="{{ 'marquee.js' | asset_url }}" type="module" fetchpriority="low"></script>
+          <marquee-component
+            style="--marquee-direction: reverse; --marquee-gap: 40px;"
+            data-speed-factor="25"
+            data-movement-direction="reverse"
+          >
+            <div class="marquee__wrapper" ref="wrapper">
+              <div class="marquee__content" ref="content">
+                <div class="marquee__repeated-items" ref="marqueeItems[]">
+                  <span class="h3">Cognitive Performance</span>
+                  <span aria-hidden="true" style="color: rgb(var(--color-foreground-rgb) / 0.25); font-size: 1.25rem;">&#x2726;</span>
+                  <span class="h3">Immune Support</span>
+                  <span aria-hidden="true" style="color: rgb(var(--color-foreground-rgb) / 0.25); font-size: 1.25rem;">&#x2726;</span>
+                  <span class="h3">Gut Health</span>
+                  <span aria-hidden="true" style="color: rgb(var(--color-foreground-rgb) / 0.25); font-size: 1.25rem;">&#x2726;</span>
+                  <span class="h3">Metabolic Balance</span>
+                  <span aria-hidden="true" style="color: rgb(var(--color-foreground-rgb) / 0.25); font-size: 1.25rem;">&#x2726;</span>
+                  <span class="h3">Stress Resilience</span>
+                  <span aria-hidden="true" style="color: rgb(var(--color-foreground-rgb) / 0.25); font-size: 1.25rem;">&#x2726;</span>
+                  <span class="h3">Energy &amp; Vitality</span>
+                  <span aria-hidden="true" style="color: rgb(var(--color-foreground-rgb) / 0.25); font-size: 1.25rem;">&#x2726;</span>
+                </div>
+              </div>
+            </div>
+          </marquee-component>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} 14d — Overflow List {%- endcomment -%}
+    <div class="cl-row cl-row--col" style="margin-block-start: var(--margin-4xl);">
+      <div class="cl-item" style="max-width: 480px;">
+        <span class="cl-label">&lt;overflow-list&gt; — collapses excess items into a "More" button</span>
+        <div class="cl-demo">
+          {%- capture cl_overflow_items -%}
+            <li>Vitamins &amp; Minerals</li>
+            <li>Adaptogens</li>
+            <li>Nootropics</li>
+            <li>Omega-3 &amp; Fish Oil</li>
+            <li>Probiotics</li>
+            <li>Antioxidants</li>
+            <li>Collagen Peptides</li>
+            <li>Electrolytes</li>
+            <li>Immune Support</li>
+            <li>Sleep &amp; Recovery</li>
+          {%- endcapture -%}
+          {%- render 'overflow-list', children: cl_overflow_items -%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} 14e — Reference table for non-renderable components {%- endcomment -%}
+    <div style="margin-block-start: var(--margin-4xl);">
+      <span class="cl-label" style="display: block; margin-block-end: var(--margin-sm);">Components requiring full page context (reference only)</span>
+      <table class="cl-wc-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Source File</th>
+            <th>Key Attributes / Refs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&lt;accordion-custom&gt;</td>
+            <td>accordion-custom.js</td>
+            <td>data-disable-on-mobile, data-disable-on-desktop, data-close-with-escape — see Section 7</td>
+          </tr>
+          <tr>
+            <td>&lt;slideshow-component&gt;</td>
+            <td>slideshow.js</td>
+            <td>autoplay, infinite, initial-slide — ref: scroller (req), slideshowContainer (req), slides, previous, next, dots</td>
+          </tr>
+          <tr>
+            <td>&lt;slideshow-slide&gt;</td>
+            <td>slideshow.js</td>
+            <td>ref="slides", slide-id, aria-hidden, variant-image — child of &lt;slideshow-component&gt;</td>
+          </tr>
+          <tr>
+            <td>&lt;quick-add-component&gt;</td>
+            <td>quick-add.js</td>
+            <td>data-product-title, data-product-options-count — opens &lt;quick-add-dialog&gt;; visible on product cards above</td>
+          </tr>
+          <tr>
+            <td>&lt;quick-add-dialog&gt;</td>
+            <td>quick-add.js</td>
+            <td>Modal dialog — child: #quick-add-modal-content[data-product-grid-content]</td>
+          </tr>
+          <tr>
+            <td>&lt;quantity-selector-component&gt;</td>
+            <td>component-quantity-selector.js</td>
+            <td>ref: quantityInput (req), minusButton (req), plusButton (req) — emits QuantitySelectorUpdateEvent; visible in quick-add flow</td>
+          </tr>
+          <tr>
+            <td>&lt;jumbo-text&gt;</td>
+            <td>jumbo-text.js</td>
+            <td>data-text-effect, data-animation-repeat, data-cap-text — scales font-size to fill container width</td>
+          </tr>
+          <tr>
+            <td>&lt;product-price&gt;</td>
+            <td>(inline web component)</td>
+            <td>Manages .price__regular / .price__sale / .price__hidden visibility — visible on product cards above</td>
+          </tr>
+          <tr>
+            <td>&lt;media-gallery&gt;</td>
+            <td>(inline web component)</td>
+            <td>Gallery grid controller — uses --gallery-aspect-ratio, --image-gap; visible in product card gallery above</td>
+          </tr>
+          <tr>
+            <td>&lt;deferred-media&gt;</td>
+            <td>(inline web component)</td>
+            <td>Lazy-loads video/iframe on interaction — states: [data-media-loaded] — children: .deferred-media__poster-button, template</td>
+          </tr>
+          <tr>
+            <td>&lt;product-model&gt;</td>
+            <td>(inline web component)</td>
+            <td>Wraps Shopify model-viewer — children: model-viewer, .deferred-media__poster-button</td>
+          </tr>
+          <tr>
+            <td>&lt;fly-to-cart&gt;</td>
+            <td>(inline web component)</td>
+            <td>Animated product-to-cart fly animation — triggered by Add to Cart; visible in quick-add flow above</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
 
@@ -1582,6 +1721,10 @@ accordion-custom details[open] .details-content:focus-within {
   "name": "Component Library",
   "class": "component-library",
   "settings": [],
+  "blocks": [
+    { "type": "_product-card" },
+    { "type": "_collection-card" }
+  ],
   "presets": [
     {
       "name": "Component Library"
