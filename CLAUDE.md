@@ -33,6 +33,7 @@ Read the `AGENTS.md` file only when directed to make changes, updates, or modifc
 - Keep this markdown file up to date with changes or additions related to the Shopify Theme
 - Always develop against the dev store (`atx-prod-test-01`) before pushing to production
 - Reference `nsatx-store/design-system/CLAUDE.md` for all design tokens, components, and styling decisions
+- Read `TRANSITION.md` only when specifically instructed to work on or perform the design-system to Shopify theme transition
 
 ### Testing & Quality
 
