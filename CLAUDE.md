@@ -47,5 +47,4 @@ Read the `AGENTS.md` file only when directed to make changes, updates, or modifc
 ### Documentation
 
 - Every section must have a comment block at the top describing its purpose and any non-obvious schema settings.
-- Document all metafield namespaces and keys the theme reads in `README.md`.
 - Add inline `{% comment %}` blocks for non-obvious Liquid workarounds explaining the reason.
