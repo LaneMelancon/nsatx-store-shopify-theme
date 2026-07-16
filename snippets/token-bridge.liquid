@@ -1,0 +1,104 @@
+{% doc %}
+  :root token bridge — overrides Tinker's font, color, and spacing custom
+  properties with the design system's tokens from design-tokens.css.
+  Rendered last in <head>, after theme-styles-variables and
+  color-palette, so these values win the cascade. No section, block, or
+  component file is touched; Tinker's CSS already consumes every
+  variable overridden here via var().
+
+  @example
+  {% render 'token-bridge' %}
+{% enddoc %}
+
+{% style %}
+  :root {
+    /* Fonts — overriding only the 4 base-role variables cascades to
+       every --font-<role>--*, --font-h1..h6--*, --font-paragraph--*,
+       --button-font-family-*, and --cart-secondary-font-* variable,
+       since those are all var() references to these. */
+    --font-body--family: 'Objective', 'Gill Sans', Arial, sans-serif;
+    --font-body--style: normal;
+    --font-body--weight: 400;
+    --font-subheading--family: 'Objective', 'Gill Sans', Arial, sans-serif;
+    --font-subheading--style: normal;
+    --font-subheading--weight: 400;
+    --font-heading--family: 'Objective', 'Gill Sans', Arial, sans-serif;
+    --font-heading--style: normal;
+    --font-heading--weight: 400;
+    --font-accent--family: 'Trade Gothic LT', 'Gill Sans', 'Trebuchet MS', Arial, sans-serif;
+    --font-accent--style: normal;
+    --font-accent--weight: 700;
+
+    /* Colors — confident mappings per TRANSITION.md §2. The remaining
+       Tinker color variables (hover states, per-component scoping) stay
+       driven by settings.color_palette via color-palette.liquid, which
+       already resolves correctly against the new 13-key palette. */
+    --color-background: var(--surface-brand-default);
+    --color-background-rgb: 255 255 255;
+    --color-foreground: var(--text-brand-default);
+    --color-foreground-rgb: 14 36 21;
+    --color-foreground-muted: var(--text-brand-body);
+    --color-foreground-subdued: var(--text-brand-caption);
+    --color-border: var(--border-brand-subtle);
+    --color-border-rgb: 14 14 14;
+
+    --color-primary-button-background: var(--brand-primary);
+    --color-primary-button-text: var(--text-brand-alt);
+    --color-primary-button-border: var(--brand-primary);
+    --color-secondary-button-background: transparent;
+    --color-secondary-button-text: var(--text-brand-accent);
+    --color-secondary-button-border: var(--border-brand-accent);
+
+    --color-instock: var(--icon-success-default);
+    --color-lowstock: var(--icon-warning-default);
+    --color-outofstock: var(--icon-error-default);
+    --color-error: var(--icon-error-default);
+    --color-success: var(--icon-success-default);
+
+    --color-input-background: var(--surface-brand-default);
+    --color-input-border: var(--border-brand-subtle);
+    --color-input-text: var(--text-brand-body);
+    --color-input-text-rgb: 62 80 68;
+
+    --color-selected-variant-background: var(--brand-primary);
+    --color-selected-variant-text: var(--text-brand-alt);
+
+    /* Spacing — live var() aliases (not copied literals), rounded to the
+       nearest design-system step where Tinker has no exact match. */
+    --padding-3xs: var(--space-3xs);
+    --padding-2xs: var(--space-xs);
+    --padding-xs: var(--space-sm);
+    --padding-sm: var(--space-sm);
+    --padding-md: var(--space-reg);
+    --padding-lg: var(--space-reg);
+    --padding-xl: var(--space-md);
+    --padding-2xl: var(--space-md);
+    --padding-3xl: var(--space-lg);
+    --padding-4xl: var(--space-lg);
+    --padding-5xl: var(--space-xl);
+    --padding-6xl: var(--space-2xl);
+
+    --margin-3xs: var(--space-3xs);
+    --margin-2xs: var(--space-xs);
+    --margin-xs: var(--space-sm);
+    --margin-sm: var(--space-sm);
+    --margin-md: var(--space-reg);
+    --margin-lg: var(--space-reg);
+    --margin-xl: var(--space-md);
+    --margin-2xl: var(--space-md);
+    --margin-3xl: var(--space-lg);
+    --margin-4xl: var(--space-lg);
+    --margin-5xl: var(--space-xl);
+    --margin-6xl: var(--space-3xl);
+
+    --gap-3xs: var(--space-3xs);
+    --gap-2xs: var(--space-xs);
+    --gap-xs: var(--space-sm);
+    --gap-sm: var(--space-sm);
+    --gap-md: var(--space-reg);
+    --gap-lg: var(--space-reg);
+    --gap-xl: var(--space-md);
+    --gap-2xl: var(--space-lg);
+    --gap-3xl: var(--space-xl);
+  }
+{% endstyle %}

@@ -17,12 +17,12 @@ body {
   --hover-scale-amount: 1.03;
   --hover-subtle-zoom-amount: 1.015;
   --hover-shadow-color: var(--color-shadow);
-  --hover-transition-duration: 0.25s;
-  --hover-transition-timing: ease-out;
-  --surface-transition-duration: 0.3s;
-  --surface-transition-timing: var(--ease-out-quad);
-  --submenu-animation-speed: 360ms;
-  --submenu-animation-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --hover-transition-duration: var(--duration-normal);
+  --hover-transition-timing: var(--ease-out);
+  --surface-transition-duration: var(--duration-normal);
+  --surface-transition-timing: var(--ease-out);
+  --submenu-animation-speed: var(--duration-slow);
+  --submenu-animation-easing: var(--ease-in-out);
 }
 
 html {

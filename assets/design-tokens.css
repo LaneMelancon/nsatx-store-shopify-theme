@@ -1,0 +1,330 @@
+/* ═══════════════════════════════════════════════════════════
+TOKENS — NeuroSolution Supplement Store
+Source of truth for all color, typography, spacing, and
+elevation values.
+══════════════════════════════════════════════════════════════ */
+
+/* Spacing function */
+@function --space(--multiplyer type(<number> | <percentage>): 1) returns
+  <length> {
+  result: calc(var(--space-base) * var(--multiplyer));
+}
+
+:root {
+  /* ──────────────────────────────────────────────────────────────────────── */
+  /* FONT FAMILIES                                                            */
+  /* --- Rules -------------------------------------------------------------- */
+  /* Default – 'Objective' (Regular, 400).                                    */
+  /* Buttons – 'Objective' in Medium weight (500).                            */
+  /* Secondary – 'Trade Gothic' is only used for Accents, Navbar links        */
+  /* (Desktop) and footer link column headings(Desktop).                      */
+  /* ──────────────────────────────────────────────────────────────────────── */
+
+  --font-primary: 'Objective', 'Gill Sans', Arial, sans-serif;
+  --font-secondary:
+    'Trade Gothic LT', 'Gill Sans', 'Trebuchet MS', Arial, sans-serif;
+
+  /* ─────────────────────────────── */
+  /* COLOR PRIMITIVES                */
+  /* ─────────────────────────────── */
+
+  /* ––– System ––– */
+  --color-white: #ffffff;
+  --color-black: #0e0e0e;
+
+  /* ––– Green ––– */
+  --color-green-900: #0e2415;
+  --color-green-800: #0d371b;
+  --color-green-700: #0c8234;
+  --color-green-600: #0cb144;
+  --color-green-500: #0bda51;
+  --color-green-400: #3ce174;
+  --color-green-300: #6de997;
+  --color-green-200: #9df0b9;
+  --color-green-100: #cef8dc;
+  --color-green-050: #e7fbee;
+  --color-green-025: #f8fcf9;
+
+  /* ––– Blue ––– */
+  --color-blue-900: #131c2a;
+  --color-blue-800: #192b48;
+  --color-blue-700: #254882;
+  --color-blue-600: #3066bc;
+  --color-blue-500: #3b82f6;
+  --color-blue-400: #629bf8;
+  --color-blue-300: #89b4fa;
+  --color-blue-200: #b1cdfb;
+  --color-blue-100: #d8e6fd;
+  --color-blue-050: #ebf2fe;
+  --color-blue-025: #f5f8fe;
+
+  /* ––– Orange ––– */
+  --color-orange-900: #291f0d;
+  --color-orange-800: #47320d;
+  --color-orange-700: #82570d;
+  --color-orange-600: #bc7b0c;
+  --color-orange-500: #f59e0b;
+  --color-orange-400: #f7b13c;
+  --color-orange-300: #f9c56d;
+  --color-orange-200: #fbd89d;
+  --color-orange-100: #fdecce;
+  --color-orange-050: #fef5e6;
+  --color-orange-025: #fffcf0;
+
+  /* ––– Red ––– */
+  --color-red-900: #291414;
+  --color-red-800: #461b1b;
+  --color-red-700: #7f2929;
+  --color-red-600: #b73737;
+  --color-red-500: #ef4444;
+  --color-red-400: #f26969;
+  --color-red-300: #f58f8f;
+  --color-red-200: #f9b4b4;
+  --color-red-100: #fcdada;
+  --color-red-050: #fdecec;
+  --color-red-025: #fef5f5;
+
+  /* ––– Neutral ––– */
+  --color-neutral-950: #1a2f21;
+  --color-neutral-900: #273a2d;
+  --color-neutral-800: #3e5044;
+  --color-neutral-700: #57665c;
+  --color-neutral-600: #6e7c73;
+  --color-neutral-500: #86918a;
+  --color-neutral-400: #9fa7a2;
+  --color-neutral-300: #b6bdb8;
+  --color-neutral-200: #cfd3d0;
+  --color-neutral-100: #e6e9e7;
+  --color-neutral-050: #f3f4f3;
+  --color-neutral-025: #f9faf9;
+
+  /* ─────────────────────────────── */
+  /* COLOR ALIASES                   */
+  /* ─────────────────────────────── */
+
+  /* ––– System ––– */
+  --system-default: var(--color-black);
+  --system-default-hover: rgba(14, 14, 14, 0.15);
+  --system-alt: var(--color-white);
+  --system-subtle: rgba(14, 14, 14, 0.05);
+  --system-subtle-alt: rgba(14, 14, 14, 0.85);
+  --system-disabled: rgba(14, 14, 14, 0.65);
+
+  /* ––– Brand ––– */
+  --brand-default: var(--color-green-900);
+  --brand-alt: var(--color-white);
+  --brand-accent: var(--color-green-500);
+  --brand-accent-alt: var(--color-green-700);
+  --brand-primary: var(--color-green-700);
+  --brand-primary-alt: var(--color-green-200);
+  --brand-secondary: var(--color-orange-025);
+  --brand-secondary-alt: var(--color-green-025);
+  --brand-subtle: var(--color-green-050);
+  --brand-subtle-alt: var(--color-green-100);
+
+  /* ––– Surface ––– */
+  --surface-brand-default: var(--brand-alt);
+  --surface-brand-alt: var(--brand-default);
+  --surface-brand-secondary: var(--brand-secondary);
+  --surface-brand-subtle: var(--system-subtle);
+
+  /* -- Surface / Success -- */
+  --surface-success-default: var(--color-green-700);
+  --surface-success-default-hover: var(--color-green-200);
+  --surface-success-subtle: var(--color-green-050);
+
+  /* -- Surface / Info -- */
+  --surface-info-default: var(--color-blue-600);
+  --surface-info-default-hover: var(--color-blue-200);
+  --surface-info-subtle: var(--color-blue-050);
+
+  /* -- Surface / Warning -- */
+  --surface-warning-default: var(--color-orange-600);
+  --surface-warning-default-hover: var(--color-orange-200);
+  --surface-warning-subtle: var(--color-orange-050);
+
+  /* -- Surface / Error -- */
+  --surface-error-default: var(--color-red-600);
+  --surface-error-default-hover: var(--color-red-200);
+  --surface-error-subtle: var(--color-red-050);
+
+  /* ––– Text ––– */
+  --text-brand-default: var(--brand-default);
+  --text-brand-heading: var(--brand-default);
+  --text-brand-body: var(--color-neutral-800);
+  --text-brand-caption: var(--color-neutral-700);
+  --text-brand-accent: var(--brand-accent-alt);
+  --text-brand-alt: var(--brand-alt);
+
+  /* -- Text / Success -- */
+  --text-success-default: var(--color-green-700);
+  --text-success-subtle: var(--color-neutral-800);
+  --text-success-on-color: var(--color-green-025);
+  --text-success-on-color-hover: var(--color-green-700);
+
+  /* -- Text / Info -- */
+  --text-info-default: var(--color-blue-600);
+  --text-info-subtle: var(--color-blue-700);
+  --text-info-on-color: var(--color-blue-025);
+  --text-info-on-color-hover: var(--color-blue-700);
+
+  /* -- Text / Warning -- */
+  --text-warning-default: var(--color-orange-600);
+  --text-warning-subtle: var(--color-orange-700);
+  --text-warning-on-color: var(--color-orange-025);
+  --text-warning-on-color-hover: var(--color-orange-700);
+
+  /* -- Text / Error -- */
+  --text-error-default: var(--color-red-600);
+  --text-error-subtle: var(--color-red-700);
+  --text-error-on-color: var(--color-red-025);
+  --text-error-on-color-hover: var(--color-red-700);
+
+  /* ––– Icon ––– */
+  --icon-brand-default: var(--brand-default);
+  --icon-brand-accent: var(--brand-accent-alt);
+
+  /* -- Icon / Success, Info, Warning, Error -- */
+  --icon-success-default: var(--color-green-600);
+  --icon-info-default: var(--color-blue-500);
+  --icon-warning-default: var(--color-orange-500);
+  --icon-error-default: var(--color-red-500);
+
+  /* ––– Border ––– */
+  --border-brand-default: var(--brand-default);
+  --border-brand-subtle: var(--system-subtle);
+  --border-brand-accent: var(--brand-accent-alt);
+
+  /* -- Border / Success -- */
+  --border-success-default: var(--color-green-700);
+  --border-success-subtle: var(--color-green-100);
+
+  /* -- Border / Info -- */
+  --border-info-default: var(--color-blue-500);
+  --border-info-subtle: var(--color-blue-100);
+
+  /* -- Border / Warning -- */
+  --border-warning-default: var(--color-orange-500);
+  --border-warning-subtle: var(--color-orange-100);
+
+  /* -- Border / Error -- */
+  --border-error-default: var(--color-red-500);
+  --border-error-subtle: var(--color-red-100);
+
+  /* ─────────────────────────────── */
+  /* TYPOGRAPHY                      */
+  /* ─────────────────────────────── */
+  --text-h1: 3.625rem;
+  --text-h2: 2.25rem;
+  --text-h3: 1.5rem;
+  --text-h4: 1.125rem;
+  --text-h5: 1rem;
+  --text-accent: 0.75rem;
+
+  --text-2xs: 0.625rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-reg: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+
+  --leading-h1: 1.1;
+  --leading-h2: 1.15;
+  --leading-h3: 1.25;
+  --leading-h4: 1.3;
+  --leading-h5: 1.4;
+  --leading-accent: 1;
+
+  --leading-2xs: 1;
+  --leading-xs: 1.1;
+  --leading-sm: 1.15;
+  --leading-reg: 1.5;
+  --leading-md: 1.55;
+  --leading-lg: 1.65;
+
+  --tracking-h1: -0.0625rem;
+  --tracking-h2: -0.0625rem;
+  --tracking-accent: 0.125rem;
+
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* ─────────────────────────────── */
+  /* BORDER RADIUS                   */
+  /* ─────────────────────────────── */
+  --rounded-sm: 0.25rem;
+  --rounded: 0.5rem;
+  --rounded-md: 0.75rem;
+  --rounded-lg: 1rem;
+  --rounded-xl: 1.5rem;
+  --rounded-full: 50vw;
+
+  /* ─────────────────────────────── */
+  /* ELEVATION / SHADOWS             */
+  /* ─────────────────────────────── */
+  --shadow-xs: 0 1px 2px rgba(14, 36, 21, 0.04);
+  --shadow-sm:
+    0 1px 3px rgba(14, 36, 21, 0.06), 0 1px 2px rgba(14, 36, 21, 0.04);
+  --shadow-md:
+    0 4px 6px rgba(14, 36, 21, 0.05), 0 2px 4px rgba(14, 36, 21, 0.04);
+  --shadow-lg:
+    0 10px 16px rgba(14, 36, 21, 0.06), 0 4px 6px rgba(14, 36, 21, 0.04);
+  --shadow-xl:
+    0 20px 24px rgba(14, 36, 21, 0.08), 0 8px 10px rgba(14, 36, 21, 0.04);
+  --shadow-toast: 0 4px 16px rgba(14, 36, 21, 0.14);
+
+  /* ─────────────────────────────── */
+  /* TRANSITIONS                     */
+  /* ─────────────────────────────── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  /* ─────────────────────────────── */
+  /* Z-INDEX SCALE                   */
+  /* ─────────────────────────────── */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-overlay: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
+
+  /* ─────────────────────────────── */
+  /* SPACING                         */
+  /* ─────────────────────────────── */
+
+  /* –– Base Spacing Increment (0.25rem | 4px) –– */
+  --space-base: 0.25rem;
+
+  /* –– Spacing Reset (0rem | 0px) –– */
+  --space-none: 0rem;
+
+  /* –– Micro Spacing ––– */
+  /* -- 0.0625rem, 0.125rem, 0.187rem, 0.25rem | 1px, 2px, 3px, 4px -- */
+  --space-4xs: calc(var(--space-base) * 0.25);
+  --space-3xs: calc(var(--space-base) * 0.5);
+  --space-2xs: calc(var(--space-base) * 0.75);
+  --space-xs: calc(var(--space-base) * 1);
+
+  /* ––– Standard Spacing ––– */
+  /* -- 0.5rem, 1rem, 1.5rem, 2rem | 8px, 16px, 24px, 32px -- */
+  --space-sm: calc(var(--space-base) * 2);
+  --space-reg: calc(var(--space-base) * 4);
+  --space-md: calc(var(--space-base) * 6);
+  --space-lg: calc(var(--space-base) * 8);
+
+  /* ––– Layout Spacing ––– */
+  /* -- 3rem, 4rem, 5rem, 6.25rem | 48px, 64px, 80px, 100px -- */
+  --space-xl: calc(var(--space-base) * 12);
+  --space-2xl: calc(var(--space-base) * 16);
+  --space-3xl: calc(var(--space-base) * 20);
+  --space-4xl: calc(var(--space-base) * 25);
+}

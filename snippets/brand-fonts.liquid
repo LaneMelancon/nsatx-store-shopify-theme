@@ -1,0 +1,32 @@
+{% doc %}
+  Self-hosted @font-face declarations for Objective and Trade Gothic LT,
+  mirroring design-system/css/fonts.css. Only the 3 critical weights
+  (Objective 400 for body/headings, Objective 500 for buttons, Trade
+  Gothic LT 700 for accent/eyebrow text) are preloaded, per Shopify's
+  guidance to preload sparingly.
+
+  @example
+  {% render 'brand-fonts' %}
+{% enddoc %}
+
+{{ 'objective-400.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'objective-500.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'trade-gothic-lt-700.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+
+{% style %}
+  @font-face { font-family: 'Objective'; font-weight: 300; font-style: normal; src: url({{ 'objective-300.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 300; font-style: italic; src: url({{ 'objective-300-italic.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 400; font-style: normal; src: url({{ 'objective-400.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 400; font-style: italic; src: url({{ 'objective-400-italic.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 500; font-style: normal; src: url({{ 'objective-500.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 500; font-style: italic; src: url({{ 'objective-500-italic.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 700; font-style: normal; src: url({{ 'objective-700.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 700; font-style: italic; src: url({{ 'objective-700-italic.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 800; font-style: normal; src: url({{ 'objective-800.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Objective'; font-weight: 800; font-style: italic; src: url({{ 'objective-800-italic.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+
+  @font-face { font-family: 'Trade Gothic LT'; font-weight: 400; font-style: normal; src: url({{ 'trade-gothic-lt-400.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Trade Gothic LT'; font-weight: 400; font-style: italic; src: url({{ 'trade-gothic-lt-400-italic.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Trade Gothic LT'; font-weight: 700; font-style: normal; src: url({{ 'trade-gothic-lt-700.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Trade Gothic LT'; font-weight: 700; font-style: italic; src: url({{ 'trade-gothic-lt-700-italic.woff2' | asset_url }}) format('woff2'); font-display: swap; }
+{% endstyle %}
