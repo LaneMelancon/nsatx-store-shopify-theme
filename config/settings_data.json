@@ -27,6 +27,8 @@
     "type_size_h5": "18",
     "type_case_h6": "none",
     "page_background_color": "{{ settings.color_palette.background }}",
+    "page_width": "narrow",
+    "card_hover_effect": "none",
     "badge_sale_background_color": "{{ settings.color_palette.foreground }}",
     "badge_sale_text_color": "{{ settings.color_palette.foreground }}",
     "badge_sold_out_background_color": "{{ settings.color_palette.foreground }}",
