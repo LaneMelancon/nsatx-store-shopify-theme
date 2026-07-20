@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -94,7 +95,7 @@
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h2",
+                "type_preset": "h3",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -114,6 +115,7 @@
             },
             "reviews": {
               "type": "review",
+              "disabled": true,
               "settings": {
                 "stars_style": "shaded",
                 "show_number": true,
@@ -285,6 +287,7 @@
                 "border_opacity": 100,
                 "border_color": "",
                 "border_radius": 0,
+                "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
                 "padding-block-start": 8,
@@ -324,6 +327,7 @@
                     "border_opacity": 100,
                     "border_color": "",
                     "border_radius": 0,
+                    "link": "",
                     "open_in_new_tab": false,
                     "placeholder": "",
                     "padding-block-start": 0,
@@ -363,6 +367,7 @@
                         "border_opacity": 100,
                         "border_color": "",
                         "border_radius": 10,
+                        "link": "",
                         "open_in_new_tab": false,
                         "placeholder": "",
                         "padding-block-start": 42,
@@ -377,6 +382,7 @@
                           "settings": {
                             "icon": "heart",
                             "width": 24,
+                            "link": "",
                             "open_in_new_tab": false,
                             "icon_color": ""
                           },
@@ -445,6 +451,7 @@
                         "border_opacity": 100,
                         "border_color": "",
                         "border_radius": 10,
+                        "link": "",
                         "open_in_new_tab": false,
                         "placeholder": "",
                         "padding-block-start": 42,
@@ -459,6 +466,7 @@
                           "settings": {
                             "icon": "price_tag",
                             "width": 24,
+                            "link": "",
                             "open_in_new_tab": false,
                             "icon_color": ""
                           },
@@ -533,6 +541,7 @@
                     "border_opacity": 100,
                     "border_color": "",
                     "border_radius": 0,
+                    "link": "",
                     "open_in_new_tab": false,
                     "placeholder": "",
                     "padding-block-start": 0,
@@ -572,6 +581,7 @@
                         "border_opacity": 100,
                         "border_color": "",
                         "border_radius": 10,
+                        "link": "",
                         "open_in_new_tab": false,
                         "placeholder": "",
                         "padding-block-start": 42,
@@ -586,6 +596,7 @@
                           "settings": {
                             "icon": "plant",
                             "width": 24,
+                            "link": "",
                             "open_in_new_tab": false,
                             "icon_color": ""
                           },
@@ -654,6 +665,7 @@
                         "border_opacity": 100,
                         "border_color": "",
                         "border_radius": 10,
+                        "link": "",
                         "open_in_new_tab": false,
                         "placeholder": "",
                         "padding-block-start": 42,
@@ -668,6 +680,7 @@
                           "settings": {
                             "icon": "leather",
                             "width": 24,
+                            "link": "",
                             "open_in_new_tab": false,
                             "icon_color": ""
                           },
@@ -750,7 +763,7 @@
                     "text_McjMWz": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>This product is crafted with quality materials to ensure durability and performance. Designed with your convenience in mind, it seamlessly fits into your everyday life.</p>",
+                        "text": "{{ closest.product.metafields.custom.product_details | metafield_tag }}",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -789,7 +802,7 @@
                     "text_DNPAct": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>We strive to process and ship all orders in a timely manner, working diligently to ensure that your items are on their way to you as soon as possible. </p><p>We are committed to ensuring a positive shopping experience for all our customers. If for any reason you wish to return an item, we invite you to reach out to our team for assistance, and we will evaluate every return request with care and consideration.</p>",
+                        "text": "{{ closest.product.metafields.custom.supplement_ingredients | metafield_tag }}",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -843,7 +856,7 @@
         "desktop_media_position": "left",
         "equal_columns": false,
         "limit_details_width": false,
-        "gap": 48,
+        "gap": 32,
         "enable_sticky_add_to_cart": true,
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 0,
@@ -1044,6 +1057,7 @@
                 "border_opacity": 100,
                 "border_color": "",
                 "border_radius": 0,
+                "link": "",
                 "open_in_new_tab": false,
                 "padding-block-start": 24,
                 "padding-block-end": 24,
