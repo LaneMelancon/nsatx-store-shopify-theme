@@ -1355,11 +1355,11 @@
             "label": "t:options.body"
           },
           {
-            "value": "accent",
-            "label": "t:options.accent"
+            "value": "subheading",
+            "label": "t:options.subheading"
           }
         ],
-        "default": "body"
+        "default": "subheading"
       },
       {
         "type": "select",
@@ -1432,11 +1432,11 @@
             "label": "t:options.body"
           },
           {
-            "value": "accent",
-            "label": "t:options.accent"
+            "value": "subheading",
+            "label": "t:options.subheading"
           }
         ],
-        "default": "body"
+        "default": "subheading"
       },
       {
         "type": "select",
